@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhvWvwmJ8clstnuG4S4I2JeCb6bvDF824&libraries=places"></script>
 		<script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="underscore/underscore-min.js"></script>
 		<script type="text/javascript" src="/js/map.js"></script>
 		<script type="text/javascript" src="/js/app.js"></script>
   </head>
@@ -17,8 +18,9 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-3" id="left">
- 
-	      			<p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p><p>Left contents</p>
+ 					<div id="sidebar-wrapper">
+	      			
+	      			</div>
 	  			</div>   
 				<div class="col-xs-9" id="right">
 	      			<div id="map-canvas"></div>
@@ -27,4 +29,18 @@
 	  		</div>	
 	  	</div>		
 	</body>
+	<script type="text/template" id="sidebar-template">
+	<div style="text-align:center;">
+   		<% collection.forEach(function(item){ %>
+  	<hr>
+	<h4><%= item.title %></h4>
+   	<% }); %>
+  	</div>
+  	</script>
+
+
+
+
+
+
 </html>

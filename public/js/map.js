@@ -1,6 +1,15 @@
-google.maps.event.addDomListener(window, 'load', initialize);
 
-function initialize() {
+
+$(function () {
+
+  var $sidebar = $('#left');
+
+//google.maps.event.addDomListener(window, 'load', initialize);
+
+initialize();
+
+ function initialize () {
+  console.log('hit initialize');
 
   var mapOptions = {
     center: new google.maps.LatLng(37.803220, -122.370758),
@@ -24,6 +33,14 @@ function initialize() {
        new google.maps.LatLng(south, west),
        new google.maps.LatLng(north, east));
    map.fitBounds(defaultBounds);
+
+   // var point = new google.maps.LatLng(41.3, -96);
+   // var marker = new google.maps.Marker({
+
+   //                                      position: point,
+   //                                      map: map
+
+   //                                      })
 
   // Create the search box and link it to the UI element.
   var input = (document.getElementById('pac-input'));
@@ -63,10 +80,28 @@ function initialize() {
         position: place.geometry.location
       });
 
+      //fill markers array with current successful search
       markers.push(marker);
 
       bounds.extend(place.geometry.location);
+
+      //MARKER EVENT LISTENER
+      google.maps.event.addListener(marker, 'click', function() {
+        console.log('clicked')
+        map.setZoom(mapOptions.maxZoom);
+        map.setCenter(marker.getPosition());
+      });
     }
+
+    //Template the markers Array into the sidebar
+    var render = function (items, parentId, templateId) {
+    console.log('rendering' + items)
+    var template = _.template($('#' + templateId).html());
+    $('#' + parentId).prepend(template({collection: items}));
+    }
+    console.log('checking markers' + markers);
+    console.log(markers);
+    render(markers, 'sidebar-wrapper', 'sidebar-template');
 
     map.fitBounds(bounds);
   });
@@ -75,9 +110,15 @@ function initialize() {
   // Bias the SearchBox results towards places that are within the bounds of the
   // current map's viewport.
   google.maps.event.addListener(map, 'bounds_changed', function() {
+    console.log('bounds changed');
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
+
+  
 }
+
+
+}); //End JQUERY
 
 

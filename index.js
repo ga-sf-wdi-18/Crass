@@ -5,7 +5,8 @@ var express = require('express'),
 	path = require('path'),
 	bcrypt = require('bcrypt'),
 	db = require('./models'),
-	session = require('express-session');
+	session = require('express-session'),
+	_ = require('underscore');
 
 app = express();
 app.use(bodyParser.urlencoded({extended: true }));
