@@ -1,0 +1,8 @@
+//APP
+
+$(function () {
+
+
+
+});//end JQuery
+
