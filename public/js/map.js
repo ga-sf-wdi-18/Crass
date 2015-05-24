@@ -137,4 +137,3 @@ setTimeout(hype, 1000);
 
 }); //End JQUERY
 
-
