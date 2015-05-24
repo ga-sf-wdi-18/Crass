@@ -8,8 +8,8 @@ var express = require('express'),
 	session = require('express-session'),
 	_ = require('underscore');
 
-app = express();
-app.use(bodyParser.urlencoded({extended: true }));
+var app = express();
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
 	secret: 'SUPER STUFF',
 	resave: false,
@@ -51,6 +51,39 @@ app.get('/', function (req, res) {
 	var homePath = path.join(views, 'index.html');
 	res.sendFile(homePath);
 })
+
+app.get('/posts', function (req, res) {
+	db.Post.find({},
+		function (err, posts) {
+			console.log('getting posts' + posts);
+			res.send(posts);
+		});
+});
+
+app.post('/posts', function (req, res) {
+	var newPost = req.body.post;
+	db.Post.create(newPost);
+	console.log('creating ' + newPost);
+
+	//option to view individual post upon successful
+	//res.send(JSON.stringify(newPost));
+});
+
+// app.get('/buildings', function (req, res) {
+// 	db.Building.find({},
+// 		function (err, buildings) {
+// 			res.send(buildings);
+// 		});
+// });
+
+// app.post('/buildings', function (req, res) {
+// 	db.Building.create
+// })
+
+
+
+
+
 
 app.listen(3000, function () {
 	console.log('RENT APP 3000');

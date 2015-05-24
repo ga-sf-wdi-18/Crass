@@ -3,6 +3,11 @@
 $(function () {
 
   var $sidebar = $('#left');
+  var $sidebarButtons = $('.sidebarButtons');
+
+   $sidebar.click(function () {
+    console.log('assigned');
+  })
 
   //google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -77,17 +82,30 @@ $(function () {
         map: map,
         icon: image,
         title: place.name,
-        position: place.geometry.location
+        position: place.geometry.location,
+        placeId: place.place_id
       });
+
 
       //fill markers array with current successful search
       markers.push(marker);
+
+      //console.log(markers + ' here are the markers');
+      for(var i = 0; i < markers.length; i++) {
+        console.log(markers[i].placeId)
+      }
+
+
 
       bounds.extend(place.geometry.location);
 
       //MARKER EVENT LISTENER
       google.maps.event.addListener(marker, 'click', function() {
-
+        console.log('event' + event.target);
+        console.log(marker.title);
+        console.log(marker.position);
+        console.log(marker.placeId + 'place IDDDD') 
+        console.log(marker.id);
         console.log('clicked marker')
         map.setZoom(mapOptions.maxZoom);
         map.setCenter(marker.getPosition());
@@ -117,9 +135,13 @@ $(function () {
 
     renderModal(markers, 'myModalLabel', 'modal-title-template');
 
+
+
     map.fitBounds(bounds);
   });
   //End Search EventListener
+
+
 
   // Bias the SearchBox results towards places that are within the bounds of the
   // current map's viewport.
@@ -129,7 +151,6 @@ $(function () {
     searchBox.setBounds(bounds);
   });
 
-  
 }
 
 setTimeout(hype, 1000);

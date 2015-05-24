@@ -10,6 +10,10 @@ module.exports.User = require('./user');
 //POST MODEL
 var postSchema = new Schema({
 
+					place_id: {
+						type: String,
+						required: true
+					},
 					moveInYear: {
 						type: Number,
 						required: true
@@ -24,7 +28,7 @@ var postSchema = new Schema({
 					},
 					shared: {
 						type: Boolean,
-						required: true
+						required: false
 					},
 					allowsDogs: {
 						type: Boolean,
@@ -58,8 +62,9 @@ var buildingSchema =  new Schema({
 var Post = mongoose.model('Post', postSchema);
 var Building = mongoose.model('Building', buildingSchema);
 
-exports.Post = Post;
-exports.Building = Building;
+
+module.exports.Building = Building;
+module.exports.Post = Post;
 
 
 // Close connection on close
