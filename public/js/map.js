@@ -109,6 +109,10 @@ $(function () {
         console.log('clicked marker')
         map.setZoom(mapOptions.maxZoom);
         map.setCenter(marker.getPosition());
+
+
+
+        $.get('/posts')
       });
     }
 
@@ -125,7 +129,7 @@ $(function () {
 
     //CURRENTLY PUTS ALL MARKER INFO INTO EACH MODAL, MAYBE NOT FOR EACH?  MAYBE LINK DIRECTLY TO DB?
     //Template the MODAL 
-    var renderModal = function (items, parentId, templateId) {
+    var renderModalTitle = function (items, parentId, templateId) {
     console.log('rendering MODALS' + items)
     var template = _.template($('#' + templateId).html());
     $('#' + parentId).prepend(template({collection: items}));
@@ -133,7 +137,17 @@ $(function () {
     console.log('checking markers for MODALS' + markers);
     console.log(markers);
 
-    renderModal(markers, 'myModalLabel', 'modal-title-template');
+    renderModalTitle(markers, 'myModalLabel', 'modal-title-template');
+
+    var renderModalPlaceID = function (items, parentId, templateId) {
+    console.log('rendering MODALS' + items)
+    var template = _.template($('#' + templateId).html());
+    $('#' + parentId).prepend(template({collection: items}));
+    }
+    console.log('checking markers for MODALS' + markers);
+    console.log(markers);
+
+    renderModalTitle(markers, 'placeID', 'modal-placeID-template');
 
 
 

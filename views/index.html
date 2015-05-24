@@ -38,16 +38,26 @@
                      </div>
                 <div class="modal-body">
                      <h3>MODAL BODY (posts via template)</h3>
+
+                     
                      <form method="post" id="post-form" action="/posts">
 
-                     <!-- <form id="post-form"> -->
+                  		<div id="placeID">
+                  		</div>
+                  		<!-- <div>
+  						<input type="text" name="post[place_id]" placeholder="PLACEID">
+  						</div> -->
   						<div>
     					<input type="text" name="post[moveInYear]">
   						</div>
  						<div>
     					<input type="text" name="post[monthlyRent]">
   						</div>
+  						<div>
   						<input type="text" name="post[bedrooms]">
+  						</div>
+  						
+
   						<button>SUBMIT?</button>
 					</form>
                 </div>
@@ -81,9 +91,18 @@
   	</div>
   	</script>
 
+
+
 	<script type="text/template" id="modal-title-template">
    		<% collection.forEach(function(item){ %>
   		<%= item.title %>
+   	<% }); %>
+  	</div>
+  	</script>
+
+  	<script type="text/template" id="modal-placeID-template">
+   		<% collection.forEach(function(item){ %>
+  		<%= item.placeId %>
    	<% }); %>
   	</div>
   	</script>

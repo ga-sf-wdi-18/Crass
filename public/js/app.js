@@ -3,7 +3,11 @@
 var hype = function () {
 
 	var $sidebar = $('#left');
+
 	var $postForm = $('#post-form');
+
+
+
 	var $postTemp = _.template($("#modal-title-template").html())
 
 	//initialize();
@@ -12,11 +16,37 @@ var hype = function () {
 	// 	console.log('clicked' + event.target);
 	// })
 
+  //   $postForm.click( function () {
+  //   	console.log('clicked');
+  //   })
+
 	  // wait for the form to submit
   	$postForm.on("submit", function (e) {
     // prevent the page from reloading
     e.preventDefault();
+    var postData = $postForm.serialize();
+    console.log('serializing ' + postData);
+
+    // Post.create(postParams);
     $postForm[0].reset();
+
+    //POST form data
+    //THIS WORKS BUT DOESNT RESET FORM ON DONE
+    $.post("/posts", postData).
+      done(function (data) {
+      	console.log(data);
+      	 });
+        // reset the form
+        // using brackets separates the raw DOM object from the jquery magic
+        //$postForm[0].reset();
+
+    //     //  var $post = $($postTemp(data));
+
+    //     // console.log($post + 'is post');
+
+    //     // add id to $phrase
+    //      //$post.data("place_id", data._id);  // <---- change to _id
+     
   }); // END SUBMIT
 
   	// function Post() {};
@@ -39,15 +69,7 @@ var hype = function () {
   	// 				$sidebar.append('<div'> + post.bedrooms + '</div>');
   	// 			});
   	// 		});
-	
-	 // $.post('/buildings', placeId).
-  //               done(function (data) {
-  //                 console.log(data);
 
-
-
-
-  //               });
 
 
 
