@@ -6,8 +6,6 @@ var hype = function () {
 
 	var $postForm = $('#post-form');
 
-
-
 	var $postTemp = _.template($("#modal-title-template").html())
 
 	//initialize();
@@ -57,6 +55,8 @@ var hype = function () {
   	// 		//STILL NEED TO BUILD THIS  Posts.all();
   	// 	})
   	// }
+
+
 
 
   	// $.get('/posts').

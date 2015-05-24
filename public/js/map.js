@@ -95,8 +95,6 @@ $(function () {
         console.log(markers[i].placeId)
       }
 
-
-
       bounds.extend(place.geometry.location);
 
       //MARKER EVENT LISTENER
@@ -109,8 +107,6 @@ $(function () {
         console.log('clicked marker')
         map.setZoom(mapOptions.maxZoom);
         map.setCenter(marker.getPosition());
-
-
 
         $.get('/posts')
       });
@@ -148,7 +144,6 @@ $(function () {
     console.log(markers);
 
     renderModalTitle(markers, 'placeID', 'modal-placeID-template');
-
 
 
     map.fitBounds(bounds);

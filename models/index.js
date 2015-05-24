@@ -12,7 +12,7 @@ var postSchema = new Schema({
 
 					place_id: {
 						type: String,
-						required: false
+						required: true
 					},
 					moveInYear: {
 						type: Number,
