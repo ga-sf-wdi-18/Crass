@@ -26,6 +26,10 @@ html, body {
   overflow-y: scroll;
 }
 
+.sidebarAddress {
+  font-family: lato;
+}
+
 /*************************************/
 
 

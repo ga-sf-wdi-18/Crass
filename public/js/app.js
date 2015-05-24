@@ -1,32 +1,22 @@
-// //APP
+//APP.JS
 
-// $(function () {
+var hype = function () {
 
-// $.when(initialize).done(function () {
+	var $sidebar = $('#left');
 
-// console.log('hit marker');
+	
 
-// var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-// var mapOptions = {
-//   zoom: 4,
-//   center: myLatlng
-// }
-// var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	//initialize();
 
-// var marker = new google.maps.Marker({
-//     position: myLatlng,
-//     title:"Hello World!"
-// });
-
-// // To add the marker to the map, call setMap();
-// marker.setMap(map);
+	$sidebar.on('click', function (event) {
+		console.log('clicked' + event.target);
+	})
 
 
-// })    
     
 
 
 
 
-// });//end JQuery
+};//end JQuery
 

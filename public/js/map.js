@@ -4,9 +4,9 @@ $(function () {
 
   var $sidebar = $('#left');
 
-//google.maps.event.addDomListener(window, 'load', initialize);
+  //google.maps.event.addDomListener(window, 'load', initialize);
 
-initialize();
+  initialize();
 
  function initialize () {
   console.log('hit initialize');
@@ -87,7 +87,8 @@ initialize();
 
       //MARKER EVENT LISTENER
       google.maps.event.addListener(marker, 'click', function() {
-        console.log('clicked')
+
+        console.log('clicked marker')
         map.setZoom(mapOptions.maxZoom);
         map.setCenter(marker.getPosition());
       });
@@ -103,6 +104,19 @@ initialize();
     console.log(markers);
     render(markers, 'sidebar-wrapper', 'sidebar-template');
 
+
+    //CURRENTLY PUTS ALL MARKER INFO INTO EACH MODAL, MAYBE NOT FOR EACH?  MAYBE LINK DIRECTLY TO DB?
+    //Template the MODAL 
+    var renderModal = function (items, parentId, templateId) {
+    console.log('rendering MODALS' + items)
+    var template = _.template($('#' + templateId).html());
+    $('#' + parentId).prepend(template({collection: items}));
+    }
+    console.log('checking markers for MODALS' + markers);
+    console.log(markers);
+
+    renderModal(markers, 'myModalLabel', 'modal-title-template');
+
     map.fitBounds(bounds);
   });
   //End Search EventListener
@@ -117,6 +131,8 @@ initialize();
 
   
 }
+
+setTimeout(hype, 1000);
 
 
 }); //End JQUERY
