@@ -111,13 +111,15 @@ $(function () {
           title: place.name,
           position: place.geometry.location,
           placeId: place.place_id,
-          formatted_address: place.formatted_address
+          formatted_address: place.formatted_address,
+          postalCode: place.address_components[7]['short_name']
         });
         /////////////
 
 
 
         markerPlace = marker.placeId;
+        markerPostalCode = marker.postalCode;
         console.log('TRYING BELOW');
         console.log(markerPlace);
 
@@ -134,8 +136,11 @@ $(function () {
         //Limit Modal title to current marker.title only
         $('#myModalLabel').html(marker.formatted_address);
 
-        var $placeIDform = $('#placeIDbox')
+        var $placeIDform = $('#placeIDbox');
         $placeIDform.val(markerPlace);
+
+        var $postalCodeform = $('#postalCodebox');
+        $postalCodeform.val(markerPostalCode);
 
         //console.log(markers + ' here are the markers');
         for(var i = 0; i < markers.length; i++) {
@@ -228,6 +233,7 @@ $(function () {
             console.log(marker.internalPosition.A, '   THIS IS LAT');
             console.log(marker.internalPosition.F, ' THIS IS LON');
             console.log(marker.placeId + 'place IDDDD'); 
+            console.log(marker.postalCode, '     POSTAL CODE')
             console.log(marker.id);
             console.log('clicked marker')
             map.setZoom(mapOptions.maxZoom);

@@ -69,6 +69,17 @@ app.post('/posts', function (req, res) {
 	//res.send(JSON.stringify(newPost));
 });
 
+app.get('/posts/api', function (req, res) {
+	//access:   http://localhost:3000/posts/api?place_id=EiwxMjMyIE1hcmtldCBTdCwgU2FuIEZyYW5jaXNjbywgQ0EgOTQxMDIsIFVTQQ  
+
+	var place_id = req.query.place_id;
+	//res.send('Thank you, ' + place_id);
+	db.Post.find({ place_id:  place_id},
+		function (err,posts) {
+			res.send(posts);
+		});
+});
+
 // app.get('/buildings', function (req, res) {
 // 	db.Building.find({},
 // 		function (err, buildings) {

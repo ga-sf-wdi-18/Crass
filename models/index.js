@@ -14,6 +14,10 @@ var postSchema = new Schema({
 						type: String,
 						required: true
 					},
+					postalCode: {
+						type: Number,
+						required: true
+					},
 					moveInYear: {
 						type: Number,
 						required: true

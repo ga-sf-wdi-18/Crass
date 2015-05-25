@@ -16,11 +16,13 @@ var hype = function () {
 	//hide onload
 	$placeIDform.hide();
 
-
+	var $postalCodeform = $('#postalCodebox');
+	//hide onload
+    $postalCodeform.hide();
 
 	var $addressBox = $('#addressDiv')
-      //Hide Onload
-      $addressBox.hide();
+    //Hide Onload
+    $addressBox.hide();
 
 
 
