@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<title>RENTAPP</title>
+		<title>Gauche</title>
 		<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>  
 		<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/map.css">
@@ -20,24 +20,39 @@
 		<div class="container-fluid">
 			<div class="row">
 
-        <div class="col-md-9" id="left">
+        <div class="col-xs-9 col-md-9" id="left">
               <div id="map-canvas"></div>
             <input id="pac-input" class="controls" type="text" placeholder="Search for an address">
           </div>
 
 
-				<div class="col-md-3" id="right">
-					<div id="appTitleLogin">Title</div><hr>
+				<div class="col-xs-3 col-md-3" id="right">
+        <div class="row" id="title"><div id="appTitleLogin">Gauche</div><hr></div>
+        
 
-          <div id="headerDiv">
-  					<div id="addressDiv" class="ninja">&nbsp;
-  					</div>
-  					<div id="pencilDiv" class="ninja">
-  		 					<a href="#" id="modalActivateButton" class="glyphicon glyphicon-send"
-  		    				data-toggle="modal"
-  		    				data-target="#basicModal">&nbsp;Post</a>
-  	    		</div>
+          <div class="row" id="headerDiv">
+
+            <div class="col-xs-9 col-md-9" id="addressBar">&nbsp;
+              <div id="addressDiv" class="ninja">&nbsp;</div>
+            </div>
+            <div class="col-xs-3 col-md-3" id="postButtonDiv">&nbsp;
+              <div id="pencilDiv" class="ninja">
+                  <a href="#" id="modalActivateButton" class="glyphicon glyphicon-send"
+                    data-toggle="modal"
+                    data-target="#basicModal">&nbsp;Post</a>
+              </div>
+            </div>
+
           </div>
+
+
+
+
+
+
+					
+  					
+  					
 
  					<div id="sidebar-wrapper"></div>
 

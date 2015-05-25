@@ -28,27 +28,31 @@ html, body {
   border-left: 5px solid rgba(252, 110, 81, .4);
 }
 
+#title {
+  min-height: 6em;
+  max-height: 6em;
+}
+
 #appTitleLogin {
+  margin-left: .1em;
+  margin-top: .1em;
+  margin-bottom: -.1em;
   font-size: 3em;
   font-family: lato;
   text-align: left;
 }
 
 #headerDiv {
-  margin-top: -20px;
+  max-height: 3em;
 }
 
-#addressDiv {
-  font-family: lato;
-  font-size: 1.25em;
-  text-align: center;
-  margin-top: 1.25em;
-  margin-right: 8em;
-  display: inline-block;
+#addressBar {
+  text-align: left;
+  min-height: 3em;
 }
 
-#pencilDiv {
-  display: inline-block;
+#pencilButtonDiv {
+  min-height: 3em;
 }
 
 .small {
