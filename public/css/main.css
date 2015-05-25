@@ -13,7 +13,7 @@ html, body {
 }
 
 #right {
-  background-color: #FC6E51;
+  background-color: RGBA(252, 110, 81, .8);
   text-align: center;
   height:100%;
   padding-right: 0;
@@ -21,13 +21,37 @@ html, body {
 
 #left {
   height:100%;
-  background-color: #4FC1E9;
+  background-color: RGBA(65, 66, 81, 1);
+  color: white;
   text-align: center;
   overflow-y: scroll;
 }
 
-.sidebarAddress {
+.small {
+  font-size: .8em;
+  color: grey;
+}
+
+.sidebarLine {
   font-family: lato;
+}
+
+#modalActivateButton {
+  background-color: grey;
+  border: none;
+}
+
+.modal-body:not(#moveInYearDiv) {
+  padding-left: 3em;
+  margin-top: -50px;
+}
+
+#post-form div {
+  margin: 1em;
+}
+
+#moveInYearDiv {
+  margin-left: .8em;
 }
 
 /*************************************/

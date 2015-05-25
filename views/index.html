@@ -18,8 +18,14 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-3" id="left">
+					<h3></h3>
+					<div>
+		 					<a href="#" id="modalActivateButton" class="btn btn-success sidebarButtons"
+		    				data-toggle="modal"
+		    				data-target="#basicModal"><h6>Post your rent for this Address</h6></a>
+	    			</div>
  					<div id="sidebar-wrapper">
-	      			
+	 					
 	      			</div>
 	  			</div>   
 				<div class="col-xs-9" id="right">
@@ -33,38 +39,47 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                      <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">CLOSE?</button>
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                           <h4 class="modal-title" id="myModalLabel"></h4>
                      </div>
                 <div class="modal-body">
-                     <h3>MODAL BODY (posts via template)</h3>
 
-                     
                      <form method="post" id="post-form" action="/posts">
 
                   		<div id="placeID">
                   		</div>
                   		<div>
-  						<input type="text" name="post[place_id]" placeholder="PLACEID">
+  						<input type="checkbox" name="post[shared]"> Shared Living Space? <span class="small">roommates, communal housing, etc.</span>
   						</div>
   						<div>
-    					<input type="text" name="post[moveInYear]">
+  						<select name="post[bedrooms]" form="post-form">
+  						<option value=1>1</option>
+  						<option value=2>2</option>
+  						<option value=3>3</option>
+  						<option value=4>4+</option>
+  						</select>
+  						Bedrooms
+  						<span class="small">  (if shared, list only the rooms included in your rent)</span>
+  						</div>
+                  		<div>
+  						<input type="text" name="post[place_id]" placeholder="PLACEID" id="placeIDbox">
+  						</div>
+  						<div>
+    					<input type="text" id="moveInYearDiv" name="post[moveInYear]" placeholder="Move In Year">
   						</div>
  						<div>
-    					<input type="text" name="post[monthlyRent]">
+ 						$
+    					<input type="text" id="monthlyRentDiv" name="post[monthlyRent]" placeholder="Monthly Rent"><span class="small">  (if shared, list only what you pay in rent)</span>
   						</div>
   						<div>
-  						<input type="text" name="post[bedrooms]">
+  						<input type="checkbox" name="post[allowsDogs]"> Dogs Allowed?
   						</div>
-  						
+  						<div>
+  						<input type="checkbox" name="post[allowsCats]"> Cats Allowed?
+  						</div>
 
-  						<button>SUBMIT?</button>
+  						<button class="btn btn-primary">Submit</button>
 					</form>
-                </div>
-                <div class="modal-footer">
-					 <h3>MODAL FOOTER (add new post via template)</h3>
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
                 </div>
            </div>
@@ -76,21 +91,29 @@
 	</body>
 
 
-
-
-
 	<script type="text/template" id="sidebar-template">
-	<div style="text-align:center;">
+	<div class="sidebarDivs" style="text-align:center;">
+	<hr>
+	
    		<% collection.forEach(function(item){ %>
-  		<hr>
-  		<a href="#" class="btn btn-lg btn-success sidebarButtons" 
-   data-toggle="modal"
-   data-target="#basicModal"><h4><div class="sidebarAddress"><%= item.title %></div></h4></a>
-		
+
+  		<h6><div class="sidebarLine"><%= item %></div></h6>
    	<% }); %>
+   		
   	</div>
   	</script>
 
+  	<script type="text/template" id="sidebar-templateUNCHANGED">
+	// <div style="text-align:center;">
+ //   		<% collection.forEach(function(item){ %>
+ //  		<hr>
+ //  		<a href="#" class="btn btn-lg btn-success sidebarButtons" 
+ //   data-toggle="modal"
+ //   data-target="#basicModal"><h4><div class="sidebarAddress"><%= item %></div></h4></a>
+		
+ //   	<% }); %>
+ //  	</div>
+  	</script>
 
 
 	<script type="text/template" id="modal-title-template">
@@ -99,6 +122,7 @@
    	<% }); %>
   	</div>
   	</script>
+
 
   	<script type="text/template" id="modal-placeID-template">
    		<% collection.forEach(function(item){ %>

@@ -28,7 +28,8 @@ var postSchema = new Schema({
 					},
 					shared: {
 						type: Boolean,
-						required: false
+						required: false,
+						default: null
 					},
 					allowsDogs: {
 						type: Boolean,

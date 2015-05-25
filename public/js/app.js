@@ -8,17 +8,14 @@ var hype = function () {
 
 	var $postTemp = _.template($("#modal-title-template").html())
 
-	//initialize();
+	var $placeIDform = $('#placeIDbox')
+	//hide onload
+	$placeIDform.hide();
 
-	// $sidebar.on('click', function (event) {
-	// 	console.log('clicked' + event.target);
-	// })
 
-  //   $postForm.click( function () {
-  //   	console.log('clicked');
-  //   })
+	var $modal = $('#basicModal');
 
-	  // wait for the form to submit
+	// wait for the form to submit
   	$postForm.on("submit", function (e) {
     // prevent the page from reloading
     e.preventDefault();
@@ -28,24 +25,16 @@ var hype = function () {
     // Post.create(postParams);
     $postForm[0].reset();
 
+    $('.modal').slideUp().fadeOut(300);
+    $('div.modal-backdrop').fadeOut(500);
+
     //POST form data
-    //THIS WORKS BUT DOESNT RESET FORM ON DONE
+    //THIS WORKS NO TOUCHIE!
     $.post("/posts", postData).
       done(function (data) {
       	console.log(data);
-      	 });
-        // reset the form
-        // using brackets separates the raw DOM object from the jquery magic
-        //$postForm[0].reset();
-
-    //     //  var $post = $($postTemp(data));
-
-    //     // console.log($post + 'is post');
-
-    //     // add id to $phrase
-    //      //$post.data("place_id", data._id);  // <---- change to _id
-     
-  }); // END SUBMIT
+      });
+  	}); // END SUBMIT
 
   	// function Post() {};
 
@@ -55,28 +44,6 @@ var hype = function () {
   	// 		//STILL NEED TO BUILD THIS  Posts.all();
   	// 	})
   	// }
-
-
-
-
-  	// $.get('/posts').
-  	// 		done(function (data) {
-  	// 			console.log(data);
-  	// 			console.log(data.bedrooms);
-
-  	// 			$(data).each(function (index, post) {
-  	// 				console.log(post.bedrooms)
-  	// 				$sidebar.append('<div'> + post.bedrooms + '</div>');
-  	// 			});
-  	// 		});
-
-
-
-
-    
-
-
-
-
+  	
 };//end JQuery
 
