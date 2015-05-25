@@ -18,6 +18,12 @@ var hype = function () {
 
 
 
+	var $addressBox = $('#addressDiv')
+      //Hide Onload
+      $addressBox.hide();
+
+
+
 
 	var $modal = $('#basicModal');
 
