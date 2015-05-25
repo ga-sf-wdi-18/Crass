@@ -1,14 +1,15 @@
 var markerPlace = "";
 
+var $modalButton = $('#pencilDiv');
+      //Hide Onload
+      $modalButton.hide();
 
 
 $(function () {
 
   var $sidebar = $('#left');
   var $sidebarButtons = $('.sidebarButtons');
-  var $modalButton = $('#modalActivateButton');
-  //Hide Onload
-  $modalButton.hide();
+  
   
 
   $sidebar.click(function () {
@@ -134,6 +135,8 @@ map.setOptions({styles: styles});
       $addressBox.hide();
       //fade in Address above button with marker address info
       $addressBox.html(marker.title).fadeIn(1000);
+
+      
       //fade in modalButton to post about the address
       $modalButton.fadeIn(1000);
 

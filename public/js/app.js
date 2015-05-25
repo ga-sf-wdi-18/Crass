@@ -1,5 +1,9 @@
 //APP.JS
 
+var $modalButton = $('#pencilDiv');
+      //Hide Onload
+      $modalButton.hide();
+
 var hype = function () {
 
 	var $sidebar = $('#left');
@@ -11,6 +15,8 @@ var hype = function () {
 	var $placeIDform = $('#placeIDbox')
 	//hide onload
 	$placeIDform.hide();
+
+
 
 
 	var $modal = $('#basicModal');
@@ -44,6 +50,7 @@ var hype = function () {
   	// 		//STILL NEED TO BUILD THIS  Posts.all();
   	// 	})
   	// }
-  	
+
+
 };//end JQuery
 

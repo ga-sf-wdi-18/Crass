@@ -17,25 +17,30 @@
 	<body>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-3" id="left">
-					<div id="appTitleLogin">Crass</div>
-					<div id="addressDiv">&nbsp;
+
+        <div class="col-md-9" id="right">
+              <div id="map-canvas"></div>
+            <input id="pac-input" class="controls" type="text" placeholder="Search for an address">
+          </div>
 
 
-					</div>
-					<div>
-		 					<a href="#" id="modalActivateButton" class="glyphicon glyphicon-pencil"
-		    				data-toggle="modal"
-		    				data-target="#basicModal"><h6>Post</h6></a>
-	    			</div>
- 					<div id="sidebar-wrapper">
-	 					
-	      			</div>
+				<div class="col-md-3" id="left">
+					<div id="appTitleLogin">Title</div><hr>
+
+          <div id="headerDiv">
+  					<div id="addressDiv">&nbsp;
+  					</div>
+  					<div id="pencilDiv">
+  		 					<a href="#" id="modalActivateButton" class="glyphicon glyphicon-send"
+  		    				data-toggle="modal"
+  		    				data-target="#basicModal">&nbsp;Post</a>
+  	    		</div>
+          </div>
+
+ 					<div id="sidebar-wrapper"></div>
+
 	  			</div>   
-				<div class="col-xs-9" id="right">
-	      			<div id="map-canvas"></div>
-		  			<input id="pac-input" class="controls" type="text" placeholder="Search for an address">
-	  			</div>
+				
 	  		</div>	
 	  	</div>
 <!-- MODAL CONFIG -->
