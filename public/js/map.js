@@ -1,12 +1,10 @@
-var markerPlace = "";
-
-
 
 
 $(function () {
 
   var $sidebar = $('#left');
   var $sidebarButtons = $('.sidebarButtons');
+  var $sidebarWrapper = $('#sidebar-wrapper');
   
   
 
@@ -33,8 +31,6 @@ $(function () {
     var west = -122.434014;
     var north = 37.871814;
     var east = -122.273756;
-
-
 
     var markers = [];
 
@@ -77,11 +73,20 @@ $(function () {
 
       var searchBox = new google.maps.places.SearchBox((input));
 
-
+      var counter = 1;
 ////////////////////////////////////////////////////////////////////////////////////////
       // Listen for the event fired when the user selects an item from the
       // pick list. Retrieve the matching places for that item.
       google.maps.event.addListener(searchBox, 'places_changed', function() {
+
+        counter++
+        //$sidebarWrapper.slideUp(200, function () {
+          var resultsCheck = '';
+          $sidebarWrapper.html('').hide();
+
+
+       // });
+        
         var places = searchBox.getPlaces();
 
         if (places.length == 0) {
@@ -112,14 +117,13 @@ $(function () {
           position: place.geometry.location,
           placeId: place.place_id,
           formatted_address: place.formatted_address,
-          postalCode: place.address_components[7]['short_name']
+          postalCode: place.address_components[7]['short_name'] 
         });
-        /////////////
 
+        ///////////////////////////
 
-
-        markerPlace = marker.placeId;
-        markerPostalCode = marker.postalCode;
+        var markerPlace = marker.placeId;
+        var markerPostalCode = marker.postalCode;
         console.log('TRYING BELOW');
         console.log(markerPlace);
 
@@ -161,12 +165,13 @@ $(function () {
                   }
                 }
 
+                console.log(matchedPlaces, '  MATCHED PALCEESESE')
+
                 //Template the matches from the markers Array into the sidebar
                 var render = function (items, parentId, templateId) {
-                console.log('rendering' + items)
-
-                var template = _.template($('#' + templateId).html());
-                $('#' + parentId).prepend(template({collection: items}));
+                  console.log('rendering' + items)
+                  var template = _.template($('#' + templateId).html());
+                  $('#' + parentId).prepend(template({collection: items}));
                 }
 
                 console.log('checking markers' + markers);
@@ -204,11 +209,9 @@ $(function () {
                     } else {
                       postArray.push( 'Allowed Cats : ' + 'No');
                     }
-                    
                   }
                   var linebreak = '<hr>';
                   postArray.push(linebreak);
-
                 }
                 //END logEach function
 
@@ -217,6 +220,17 @@ $(function () {
                 console.log(postArray,  ' the post array');
 
                 render(postArray, 'sidebar-wrapper', 'sidebar-template');
+
+                //not sure if necessary to clear sidebar
+                matchedPlaces = [];
+
+                $sidebarWrapper.fadeIn(1000);
+
+                var emptyMessage = "<hr> No rent info for the address provided, how about posting yours anonymously?"
+
+                if (postArray.length === 0) {
+                  $sidebarWrapper.html(emptyMessage).hide().fadeIn(600);
+                }
 
           });
           //END AJAX Request

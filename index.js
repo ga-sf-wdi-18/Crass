@@ -55,7 +55,7 @@ app.get('/', function (req, res) {
 app.get('/posts', function (req, res) {
 	db.Post.find({},
 		function (err, posts) {
-			console.log('getting posts' + posts);
+			console.log('getting posts ' + posts);
 			res.send(posts);
 		});
 });
@@ -64,7 +64,6 @@ app.post('/posts', function (req, res) {
 	var newPost = req.body.post;
 	db.Post.create(newPost);
 	console.log('creating ' + newPost);
-
 	//option to view individual post upon successful
 	//res.send(JSON.stringify(newPost));
 });
