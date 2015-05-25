@@ -12,14 +12,14 @@ html, body {
   z-index: 10;
 }
 
-#right {
+#left {
   background-color: RGBA(252, 110, 81, .8);
   text-align: center;
   height:100%;
   padding-right: 0;
 }
 
-#left {
+#right {
   height:100%;
   background-color: RGBA(156, 196, 192, 1);
   color: white;
@@ -97,20 +97,20 @@ html, body {
 	#pac-input {
 		max-width: 50%;
 	}
-  #right {
+  #left {
     position: absolute;
     top: 0px;
     bottom: 0;
-    right: 0;
+    left: 0;
     width: 75%;
     overflow-y: scroll; 
   }
   
-  #left {
+  #right {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
+    right: 0;
     overflow-y: scroll;
     width: 25%;
   }
