@@ -25,8 +25,6 @@ var hype = function () {
     $addressBox.hide();
 
 
-
-
 	var $modal = $('#basicModal');
 
 	// wait for the form to submit
