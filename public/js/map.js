@@ -226,7 +226,7 @@ $(function () {
 
                 $sidebarWrapper.fadeIn(1000);
 
-                var emptyMessage = "<hr> No rent info for the address provided, how about posting yours anonymously?"
+                var emptyMessage = "<hr> There's no data regarding this address, how about posting yours anonymously?"
 
                 if (postArray.length === 0) {
                   $sidebarWrapper.html(emptyMessage).hide().fadeIn(600);
