@@ -98,6 +98,50 @@ app.get('/posts/api', function (req, res) {
 // 	db.Building.create
 // })
 
+////////////////////////////////////////////////
+
+app.get('/users', function (req, res) {
+	db.User.find({},
+		function (err, users) {
+			console.log('here are YO USERS ' + users);
+			res.send(users);
+		});
+});
+
+app.post('/users', function (req, res) {
+	var newUser = req.body.user;
+	console.log(newUser + ' this is the newUser');
+	db.User.
+	//newUser is first param, anon function is the callback to execute once createSecure finishes
+	createSecure(newUser, function (err, user) {
+		if (user) {
+			req.login(user);
+			res.send('CONGRATS' + user + ' you SIGNED UP');
+		} else {
+			res.send('NOPE SIGNUP DIDNT WORK');
+		}
+	});
+});
+
+app.get('/login', function (req, res) {
+	//NOT SURE IF WE NEED THIS?
+});
+
+
+app.post('/login', function (req, res) {
+	var user = req.body.user;
+	console.log(user + '  THIS is the user for LOGIN POST');
+
+	db.User.authenticate(user, function (err, user) {
+		console.log('made it to authenticate');
+		if (!err) {
+			req.login(user);
+			res.redirect('/');
+		} else {
+			res.send('ERROR LOGIN NO GO');
+		}
+	});
+});
 
 
 

@@ -6,7 +6,6 @@ $(function () {
   var $sidebarButtons = $('.sidebarButtons');
   var $sidebarWrapper = $('#sidebar-wrapper');
   
-  
 
   $sidebar.click(function () {
     console.log('assigned');
@@ -19,6 +18,7 @@ $(function () {
   function initialize () {
     console.log('hit initialize');
 
+    
     var mapOptions = {
       center: new google.maps.LatLng(37.803220, -122.370758),
       maxZoom: 16
@@ -161,7 +161,7 @@ $(function () {
                 for (var i = 0; i < json.length; i ++) {
                   if (json[i].place_id === marker.placeId) {
                     console.log ('Success!');
-                    matchedPlaces.push(json[i]);
+                    matchedPlaces.unshift(json[i]);
                   }
                 }
 
