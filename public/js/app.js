@@ -65,7 +65,6 @@ var hype = function () {
     $signupForm = $('#register-form');
     $signupPassword = $('#signupPassword');
     $confirmPassword = $('#confirmSignupPassword');
-
     
     $signupForm.on('submit', function (e) {
     	e.preventDefault();

@@ -23,7 +23,10 @@ app.use(express.static("bower_components"));
 var loginHelpers = function (req, res, next) {
 
 	req.login = function (user) {
+		console.log('in login session id');
 		req.session.userId = user._id;
+		console.log(user._id);
+		console.log(req.session.userId, 'SESSION ID');
 		req.user = user;
 		return user;
 	};
@@ -35,11 +38,16 @@ var loginHelpers = function (req, res, next) {
 
 	req.currentUser = function (cb) {
 		var userId = req.session.userId;
+		console.log('in current user session id')
+		console.log('here it is the id from req.current ' + userId);
 		db.User.
 			findOne({
 				_id: userId
-			}, cb);
-	}
+			}, function (err, user) {
+				req.user = user;
+				cb(null, user);
+			})
+	};
 
 	// VERY IMPORTANT TO CONTINUE
 	next();
@@ -49,7 +57,10 @@ app.use(loginHelpers);
 
 app.get('/', function (req, res) {
 	var homePath = path.join(views, 'index.html');
-	res.sendFile(homePath);
+	req.currentUser(function() {
+		res.sendFile(homePath);
+	})
+	
 })
 
 app.get('/posts', function (req, res) {
@@ -136,6 +147,9 @@ app.post('/login', function (req, res) {
 		console.log('made it to authenticate');
 		if (!err) {
 			req.login(user);
+			req.currentUser(function () {
+				console.log('HERE');
+			})
 			res.redirect('/');
 		} else {
 			res.send('ERROR LOGIN NO GO');

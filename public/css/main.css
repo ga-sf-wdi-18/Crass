@@ -72,7 +72,8 @@ html, body {
 #modalActivateButton {
   color: white;
   background-color: transparent;
-  border: none;
+  outline: 0;
+
 }
 
 .modal-body:not(#moveInYearDiv) {
