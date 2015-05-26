@@ -12,6 +12,10 @@ html, body {
   z-index: 10;
 }
 
+#map-canvas .gm-style div:nth-of-type(2) a div{
+  display: none;
+}
+
 #left {
   background-color: RGBA(252, 110, 81, .8);
   text-align: center;
