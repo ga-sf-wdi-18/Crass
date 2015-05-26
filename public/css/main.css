@@ -47,12 +47,13 @@ html, body {
 }
 
 #addressBar {
+  font-size: 1.1em;
   text-align: left;
   min-height: 3em;
 }
 
-#pencilButtonDiv {
-  min-height: 3em;
+#pencilDiv {
+  font-family: lato;
 }
 
 .small {
