@@ -23,20 +23,18 @@ var hype = function () {
 
     
     $loginModal = $('#loginModal');
-    $loginModal.click( function () {
-      console.log('CLICKED DA MODAL');
-    })
-    var modaloptions = {
+    
+
+    if (localStorage.isMember === undefined) {
+    	var modaloptions = {
           backdrop : "static",
           show : true
             }
-
-
-    //IF NOT USER RUN THIS, MUST CHECK FOR SESSION/COOKIE
-    window.setTimeout(function () {
-    	$loginModal.modal(modaloptions);
-
-    }, 1000);
+	    //IF NOT USER RUN THIS, MUST CHECK FOR SESSION/COOKIE
+	    window.setTimeout(function () {
+	    	$loginModal.modal(modaloptions);
+	    }, 1000);
+    }
 
     ///////////////LOGIN/SIGNUP--FORM////////////////////
 
@@ -56,6 +54,7 @@ var hype = function () {
     			console.log('LOGIN SUCCESS');
     			$('.modal').slideUp().fadeOut(300);
     			$('div.modal-backdrop').fadeOut(500);
+    			localStorage.setItem('isMember', true);
     		}).fail(function () {
     			alert('DIDNT WORK');
     		});
@@ -85,6 +84,7 @@ var hype = function () {
     			console.log( ' SIGNED UP');
     			$('.modal').slideUp().fadeOut(300);
     			$('div.modal-backdrop').fadeOut(500);
+    			localStorage.setItem('isMember', true);
     		}).fail(function () {
     			console.log('ILLEGAL SIGNUP');
     			//put div error here

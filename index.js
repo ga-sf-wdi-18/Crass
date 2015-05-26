@@ -16,6 +16,7 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+
 var views = path.join(__dirname, 'views');
 app.use(express.static("public"));
 app.use(express.static("bower_components"));
@@ -56,6 +57,7 @@ var loginHelpers = function (req, res, next) {
 app.use(loginHelpers);
 
 app.get('/', function (req, res) {
+	console.log(req.cookies);
 	var homePath = path.join(views, 'index.html');
 	req.currentUser(function() {
 		res.sendFile(homePath);

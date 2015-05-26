@@ -16,6 +16,10 @@ html, body {
   display: none;
 }
 
+#loginModal {
+  max-height: 368px;
+}
+
 #left {
   background-color: RGBA(252, 110, 81, .8);
   text-align: center;
