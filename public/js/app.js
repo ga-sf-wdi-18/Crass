@@ -7,7 +7,7 @@ var $modalButton = $('#pencilDiv');
 var hype = function () {
 
 	var $sidebar = $('#left');
-	var $postForm = $('#post-form');
+	// var $postForm = $('#post-form');
 	var $postTemp = _.template($("#modal-title-template").html())
 	var $placeIDform = $('#placeIDbox')
 	//hide onload
@@ -98,40 +98,33 @@ var hype = function () {
 
 	///////////NEW POST FORM///////////
 
-	// wait for the form to submit
-  	$postForm.on("submit", function (e) {
-	    // prevent the page from reloading
-	    e.preventDefault();
-	    var postData = $postForm.serialize();
-	    console.log('serializing ' + postData);
+	// // wait for the form to submit
+ //  	$postForm.on("submit", function (e) {
+	//     // prevent the page from reloading
+	//     e.preventDefault();
+	//     var postData = $postForm.serialize();
+	//     console.log('serializing ' + postData);
 
-	    // Post.create(postParams);
-	    $postForm[0].reset();
+	//     // Post.create(postParams);
+	//     $postForm[0].reset();
 
-	    $('.modal').slideUp().fadeOut(300);
-	    $('div.modal-backdrop').fadeOut(500);
+	//     $('.modal').slideUp().fadeOut(300);
+	//     $('div.modal-backdrop').fadeOut(500);
 
-	    //POST form data
-	    //THIS WORKS NO TOUCHIE!
-	    $.post("/posts", postData).
-	      done(function (data) {
-	      	//console.log(data);
-	      	console.log('made it to done');
+	//     //POST form data
+	//     //THIS WORKS NO TOUCHIE!
+	//     $.post("/posts", postData).
+	//       done(function (data) {
+	//       	//console.log(data);
+	//       	console.log('made it to done');
 
 	      	
-	      }).always(function () {
-	      	console.log('made it to always');
-	      	check();
-	      });
-  	}); // END SUBMIT
+	//       }).always(function () {
+	//       	console.log('made it to always');
+	//       	check();
+	//       });
+ //  	}); // END SUBMIT
   	
-  // 	$.get('/posts', { place_id : {{ bus_id }} })
-  // .success(function (data) {
-  //   // do render
-  // });
-
- 
-
   	////////Begin Login Modal Animations//////
 
   	$('#login-form-link').click(function(e) {
@@ -150,4 +143,3 @@ var hype = function () {
 	});
 
 };//end JQuery
-

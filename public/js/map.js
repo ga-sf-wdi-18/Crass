@@ -6,6 +6,7 @@ $(function () {
   var $sidebar = $('#left');
   var $sidebarButtons = $('.sidebarButtons');
   var $sidebarWrapper = $('#sidebar-wrapper');
+  var $postForm = $('#post-form');
   
 
   $sidebar.click(function () {
@@ -235,21 +236,32 @@ $(function () {
         renderNewPost();
           //END AJAX Request
 
+                // wait for the form to submit
+              $postForm.on("submit", function (e) {
+                // prevent the page from reloading
+                e.preventDefault();
+                var postData = $postForm.serialize();
+                console.log('serializing ' + postData);
+
+                // Post.create(postParams);
+                $postForm[0].reset();
+
+                $('.modal').slideUp().fadeOut(300);
+                $('div.modal-backdrop').fadeOut(500);
+
+                //POST form data
+                //THIS WORKS NO TOUCHIE!
+                $.post("/posts", postData);
+                  // $sidebarWrapper.html().fadeOut(1000);
+                  renderNewPost();
+                  $sidebarWrapper.hide().fadeIn(1800);
+              }); 
+              // END SUBMIT
+
           bounds.extend(place.geometry.location);
 
           //MARKER EVENT LISTENER
           google.maps.event.addListener(marker, 'click', function() {
-            console.log('event' + event.target);
-            console.log(marker.title);
-            console.log(marker.position);
-            console.log(marker);
-            console.log(marker.formatted_address);
-            console.log(marker.internalPosition.A, '   THIS IS LAT');
-            console.log(marker.internalPosition.F, ' THIS IS LON');
-            console.log(marker.placeId + 'place IDDDD'); 
-            console.log(marker.postalCode, '     POSTAL CODE')
-            console.log(marker.id);
-            console.log('clicked marker')
             map.setZoom(mapOptions.maxZoom);
             map.setCenter(marker.getPosition());
 
@@ -275,4 +287,3 @@ setTimeout(hype, 1000);
 
 }); 
 //End JQUERY
-
