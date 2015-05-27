@@ -3,10 +3,10 @@
 
 $(function () {
 
-  var $sidebar = $('#left');
-  var $sidebarButtons = $('.sidebarButtons');
-  var $sidebarWrapper = $('#sidebar-wrapper');
-  var $postForm = $('#post-form');
+  window.$sidebar = $('#left');
+  window.$sidebarButtons = $('.sidebarButtons');
+  window.$sidebarWrapper = $('#sidebar-wrapper');
+  window.$postForm = $('#post-form');
   
 
   $sidebar.click(function () {
@@ -142,110 +142,17 @@ $(function () {
 
       //////////////////////////////////////////////////////
 
-      function renderNewPost() {
-
-        $.get('/posts', {place_id: marker.placeId} , function (json) {
-                console.log(json + 'dataaaaa');
-
-                var matchedPlaces = [];
-                
-                for (var i = 0; i < json.length; i ++) {
-                  if (json[i].place_id === marker.placeId) {
-                    console.log ('Success!');
-                    matchedPlaces.unshift(json[i]);
-                  }
-                }
-
-                var matchedPlacesLength = matchedPlaces.length;
-                console.log(matchedPlacesLength + 'MP LENGTH');
-
-                console.log(matchedPlaces, '  MATCHED PALCEESESE')
-
-                //Template the matches from the markers Array into the sidebar
-                var render = function (items, parentId, templateId) {
-                  console.log('rendering' + items)
-                  var template = _.template($('#' + templateId).html());
-                  $('#' + parentId).prepend(template({collection: items}));
-                }
-
-                console.log('checking markers' + markers);
-                
-                var postArray = [];
-                console.log('THIS IS POST ARRAY', postArray)
-
-                function logEach(v,i, arr) {
-                  console.log(v);
-                  //VISIBLE PLACE ID BELOW, can also push address
-                  //postArray.push(v['place_id']);
-                  postArray.push( 'Move-in Year : ' + v['moveInYear']);
-                  postArray.push( 'Monthly Rent : ' + '$' + v['monthlyRent']);
-                  postArray.push( 'Bedrooms : ' + v['bedrooms']);
-
-                  //Check to see the value of unrequired form fields and push if not null, otherwise, update HTML
-                  
-                    if (v['shared'] === true) {
-                      postArray.push( 'Shared : ' + 'Yes');
-                    } else {
-                      postArray.push( 'Shared : ' + 'No');
-                    }
-                    
-                  if (v['allowsDogs'] !== null) {
-                    if (v['allowsDogs'] === true) {
-                      postArray.push( 'Allowed Dogs : ' + 'Yes');
-                    } else {
-                      postArray.push( 'Allowed Dogs : ' + 'No');
-                    }
-                    
-                  }
-                  if (v['allowsCats'] !== null) {
-                    if (v['allowsCats'] === true) {
-                      postArray.push( 'Allowed Cats : ' + 'Yes');
-                    } else {
-                      postArray.push( 'Allowed Cats : ' + 'No');
-                    }
-                  }
-                  var linebreak = '<hr>';
-                  postArray.push(linebreak);
-                }
-                //END logEach function
-
-                matchedPlaces.forEach(logEach)
-
-                render(postArray, 'sidebar-wrapper', 'sidebar-template');
-
-                $sidebarWrapper.fadeIn(1000);
-
-                var emptyMessage = "<hr> There's no data regarding this address, how about posting yours anonymously?"
-
-                if (postArray.length === 0) {
-                  $sidebarWrapper.html(emptyMessage).hide().fadeIn(600);
-                }
-
-          });
-          //END AJAX Request
-        }
+      
         // END OF renderNewPost();
 
-        renderNewPost();
+        renderNewPost(marker);
           
 
         // wait for the form to submit
-        $postForm.on("submit", function (e) {
+        $postForm.on("submit", function(e){
           // prevent the page from reloading
           e.preventDefault();
-          var postData = $postForm.serialize();
-          console.log('serializing ' + postData);
-
-          $postForm[0].reset();
-
-          $('.modal').slideUp().fadeOut(300);
-          $('div.modal-backdrop').fadeOut(500);
-
-          //POST form data
-          //THIS WORKS NO TOUCHIE!
-          $.post("/posts", postData);
-          renderNewPost();
-          $sidebarWrapper.hide().fadeIn(1800);
+          onPostFormSubmit(marker)
         }); 
         // END SUBMIT FORM FOR NEW POST
 
@@ -273,11 +180,120 @@ $(function () {
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
+    //initializeSliders();
+
+    google.maps.event.addListenerOnce(map, 'idle', function(){
+    // do something only the first time the map is loaded
+      hype();
+    });
 
   } 
   //END INITIALIZE?????
 
-setTimeout(hype, 1000);
+//setTimeout(hype, 1000);
+
+
+
 
 }); 
 //End JQUERY
+
+
+function onPostFormSubmit(marker){
+    var postData = $postForm.serialize();
+    console.log('serializing ' + postData);
+
+    $postForm[0].reset();
+
+    $('.modal').slideUp().fadeOut(300);
+    $('div.modal-backdrop').fadeOut(500);
+
+    //POST form data
+    //THIS WORKS NO TOUCHIE!
+    $.post("/posts", postData);
+    renderNewPost(marker);
+    $sidebarWrapper.hide().fadeIn(1800);
+}
+
+function renderNewPost(marker) {
+
+  $.get('/posts', {place_id: marker.placeId} , function (json) {
+          console.log(json + 'dataaaaa');
+
+          var matchedPlaces = [];
+          
+          for (var i = 0; i < json.length; i ++) {
+            if (json[i].place_id === marker.placeId) {
+              console.log ('Success!');
+              matchedPlaces.unshift(json[i]);
+            }
+          }
+
+          var matchedPlacesLength = matchedPlaces.length;
+          console.log(matchedPlacesLength + 'MP LENGTH');
+
+          console.log(matchedPlaces, '  MATCHED PALCEESESE')
+
+          //Template the matches from the markers Array into the sidebar
+          var render = function (items, parentId, templateId) {
+            console.log('rendering' + items)
+            var template = _.template($('#' + templateId).html());
+            $('#' + parentId).prepend(template({collection: items}));
+          }
+
+          console.log('checking marker' + marker);
+          
+          var postArray = [];
+          console.log('THIS IS POST ARRAY', postArray)
+
+          function logEach(v,i, arr) {
+            console.log(v);
+            //VISIBLE PLACE ID BELOW, can also push address
+            //postArray.push(v['place_id']);
+            postArray.push( 'Move-in Year : ' + v['moveInYear']);
+            postArray.push( 'Monthly Rent : ' + '$' + v['monthlyRent']);
+            postArray.push( 'Bedrooms : ' + v['bedrooms']);
+
+            //Check to see the value of unrequired form fields and push if not null, otherwise, update HTML
+            
+              if (v['shared'] === true) {
+                postArray.push( 'Shared : ' + 'Yes');
+              } else {
+                postArray.push( 'Shared : ' + 'No');
+              }
+              
+            if (v['allowsDogs'] !== null) {
+              if (v['allowsDogs'] === true) {
+                postArray.push( 'Allowed Dogs : ' + 'Yes');
+              } else {
+                postArray.push( 'Allowed Dogs : ' + 'No');
+              }
+              
+            }
+            if (v['allowsCats'] !== null) {
+              if (v['allowsCats'] === true) {
+                postArray.push( 'Allowed Cats : ' + 'Yes');
+              } else {
+                postArray.push( 'Allowed Cats : ' + 'No');
+              }
+            }
+            var linebreak = '<hr>';
+            postArray.push(linebreak);
+          }
+          //END logEach function
+
+          matchedPlaces.forEach(logEach)
+
+          render(postArray, 'sidebar-wrapper', 'sidebar-template');
+
+          $sidebarWrapper.fadeIn(1000);
+
+          var emptyMessage = "<hr> There's no data regarding this address, how about posting yours anonymously?"
+
+          if (postArray.length === 0) {
+            $sidebarWrapper.html(emptyMessage).hide().fadeIn(600);
+          }
+
+    });
+    //END AJAX Request
+  }

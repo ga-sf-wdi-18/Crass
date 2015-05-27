@@ -6,11 +6,13 @@
 		<title>Gauche</title>
 		<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>  
 		<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/seiyria-bootstrap-slider/css/bootstrap-slider.css">
 		<link rel="stylesheet" type="text/css" href="/css/map.css">
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhvWvwmJ8clstnuG4S4I2JeCb6bvDF824&libraries=places"></script>
 		<script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src"/seiyria-bootstrap-slider/dist/js/bootstrap-slider.js"></script>
 		<script type="text/javascript" src="underscore/underscore-min.js"></script>
 		<script type="text/javascript" src="/js/map.js"></script>
   </head>
@@ -94,12 +96,22 @@
 			<div class="row">
 
         <div class="col-xs-9 col-md-9" id="left">
+        
+              <p>
+                <label for="amount">Price range:</label>
+                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+              </p>
+              <div id="slider-range"></div>
+
+
               <div id="map-canvas"></div>
             <input id="pac-input" class="controls" type="text" placeholder="Search for an address">
           </div>
           <!-- END MAP COLUMN -->
 				<div class="col-xs-3 col-md-3" id="right">
-        <div class="row" id="title"><div id="appTitleLogin">Gauche</div><hr></div>
+        <div class="row" id="title">
+          <div id="appTitleLogin">Gauche</div><hr>
+        </div>
           <div class="row" id="headerDiv">
             <div class="col-xs-9 col-sm-7 col-md-8" id="addressBar">&nbsp;
               <div id="addressDiv" class="ninja">&nbsp;</div>
@@ -172,7 +184,8 @@
 		</div>
     <!-- END NEW POST MODAL -->
 
-	<script type="text/javascript" src="/js/app.js"></script>  			
+	<script type="text/javascript" src="/js/app.js"></script> 
+  <script type="text/javascript" src="js/sliders.js"></script> 			
 	</body>
 
   <!-- BEGIN TEMPLATES -->

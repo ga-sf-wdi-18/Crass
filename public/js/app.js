@@ -4,6 +4,21 @@ var $modalButton = $('#pencilDiv');
       //Hide Onload
       $modalButton.hide();
 
+
+var checkLocalStorage = function(loginModal) {
+	var $loginModal = $loginModal || $('#loginModal');
+	if (localStorage.isMember === undefined) {
+	var modaloptions = {
+    backdrop : "static",
+    show : true
+      }
+    //IF NOT USER RUN THIS, MUST CHECK FOR SESSION/COOKIE
+    window.setTimeout(function () {
+    	$loginModal.modal(modaloptions);
+    }, 1000);
+	}
+}
+
 var hype = function () {
 
 	var $sidebar = $('#left');
@@ -23,18 +38,11 @@ var hype = function () {
 
     $loginModal = $('#loginModal');
 
-    /////CHECK STORAGE FOR RECENT LOGIN////
     
-    if (localStorage.isMember === undefined) {
-    	var modaloptions = {
-          backdrop : "static",
-          show : true
-            }
-	    //IF NOT USER RUN THIS, MUST CHECK FOR SESSION/COOKIE
-	    window.setTimeout(function () {
-	    	$loginModal.modal(modaloptions);
-	    }, 1000);
-    }
+
+    checkLocalStorage($loginModal);
+    
+    
 
     ///////////////LOGIN/SIGNUP--FORM////////////////////
 
@@ -50,12 +58,8 @@ var hype = function () {
 
     	//POST THE LOGIN DATA
     	$.post('/login', loginData, console.log('CHECKING LOGIN')).
-    		done(function (data) {
-    			console.log('LOGIN SUCCESS');
-    			$('.modal').slideUp().fadeOut(300);
-    			$('div.modal-backdrop').fadeOut(500);
-    			localStorage.setItem('isMember', true);
-    		}).fail(function () {
+    		done(successfulLogIn).
+    		fail(function () {
     			//alert('DIDNT WORK');
     			//PUT CSS ERROR HERE
     		});
@@ -69,7 +73,8 @@ var hype = function () {
     	e.preventDefault();
 
     	if ($signupPassword.val() !== $confirmPassword.val()) {
-    		alert('SHIT DONT MATCH');
+    		alert('DONT MATCH');
+    		//NEED TO ADD STYLING HERE
     		return;
     	}
 
@@ -78,17 +83,18 @@ var hype = function () {
 
     	//POST THE SIGNUP DATA
     	$.post('/users', signupData, console.log('CHECKING SIGNUP')).
-    		done(function (data) {
-    			console.log( ' SIGNED UP');
-    			$('.modal').slideUp().fadeOut(300);
-    			$('div.modal-backdrop').fadeOut(500);
-    			localStorage.setItem('isMember', true);
-    		}).fail(function () {
-    			console.log('ILLEGAL SIGNUP');
-    			//put div error here
+    		done(successfulLogIn).
+	 		fail(function () {
+				console.log('ILLEGAL SIGNUP');
+				//put div error here
     		});
     	});
 
+	function successfulLogIn(data) {
+		$('.modal').slideUp().fadeOut(300);
+		$('div.modal-backdrop').fadeOut(500);
+		localStorage.setItem('isMember', true);
+	} 
 
     ////////////END LOGIN FORM///////////////
 
