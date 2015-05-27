@@ -44,7 +44,13 @@ userSchema.statics.authenticate = function (params, cb) {
 		email: params.email
 	},
 	function (err, user) {
-		user.checkPswrd(params.password, cb);
+		console.log(user + 'user THING');
+		if (user === null || user === undefined) {
+			return;
+		}
+		if (!err) {
+			user.checkPswrd(params.password, cb);
+		}
 	});
 };
 

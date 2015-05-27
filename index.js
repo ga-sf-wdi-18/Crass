@@ -100,17 +100,6 @@ app.get('/posts/api', function (req, res) {
 	}
 });
 
-// app.get('/buildings', function (req, res) {
-// 	db.Building.find({},
-// 		function (err, buildings) {
-// 			res.send(buildings);
-// 		});
-// });
-
-// app.post('/buildings', function (req, res) {
-// 	db.Building.create
-// })
-
 ////////////////////////////////////////////////
 
 app.get('/users', function (req, res) {

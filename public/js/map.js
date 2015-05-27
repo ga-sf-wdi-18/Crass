@@ -20,13 +20,13 @@ $(function () {
   function initialize () {
     console.log('hit initialize');
 
-    var mapOptions = {
-      center: new google.maps.LatLng(37.803220, -122.370758),
-      maxZoom: 16
-    };
-
     var startLat = 37.803220;
     var startLong = -122.370758;
+
+    var mapOptions = {
+      center: new google.maps.LatLng(startLat, startLong),
+      maxZoom: 16
+    };
 
     var south = 37.732895;
     var west = -122.434014;
@@ -64,7 +64,8 @@ $(function () {
 
       var defaultBounds = new google.maps.LatLngBounds(
        new google.maps.LatLng(south, west),
-       new google.maps.LatLng(north, east));
+       new google.maps.LatLng(north, east)
+      );
 
       map.fitBounds(defaultBounds);
 
@@ -74,14 +75,13 @@ $(function () {
 
       var searchBox = new google.maps.places.SearchBox((input));
 
-      var counter = 1;
-////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
       // Listen for the event fired when the user selects an item from the
       // pick list. Retrieve the matching places for that item.
       google.maps.event.addListener(searchBox, 'places_changed', function() {
 
-          var resultsCheck = '';
-          $sidebarWrapper.html('').hide();
+        var resultsCheck = '';
+        $sidebarWrapper.html('').hide();
         
         var places = searchBox.getPlaces();
 
@@ -93,7 +93,6 @@ $(function () {
         }
 
         // For each place, get the icon, place name, and location.
-        markers = [];
         var bounds = new google.maps.LatLngBounds();
         //remove <1 to get full list of matched
         for (var i = 0, place; place = places[i], i < 1; i++) {
@@ -120,10 +119,9 @@ $(function () {
 
         var markerPlace = marker.placeId;
         var markerPostalCode = marker.postalCode;
-        console.log('TRYING BELOW');
         console.log(markerPlace);
 
-        //fill markers array with current FINISHED search
+        //fill markers array with current FINISHED search// May need to change to marker[i] 
         markers.push(marker);
 
         var $addressBox = $('#addressDiv');
@@ -141,11 +139,6 @@ $(function () {
 
         var $postalCodeform = $('#postalCodebox');
         $postalCodeform.val(markerPostalCode);
-
-        //console.log(markers + ' here are the markers');
-        for(var i = 0; i < markers.length; i++) {
-          console.log(markers[i].placeId)
-        }
 
       //////////////////////////////////////////////////////
 
@@ -220,9 +213,6 @@ $(function () {
 
                 render(postArray, 'sidebar-wrapper', 'sidebar-template');
 
-                //not sure if necessary to clear sidebar
-                matchedPlaces = [];
-
                 $sidebarWrapper.fadeIn(1000);
 
                 var emptyMessage = "<hr> There's no data regarding this address, how about posting yours anonymously?"
@@ -232,42 +222,46 @@ $(function () {
                 }
 
           });
-        }
-        renderNewPost();
           //END AJAX Request
+        }
+        // END OF renderNewPost();
 
-                // wait for the form to submit
-              $postForm.on("submit", function (e) {
-                // prevent the page from reloading
-                e.preventDefault();
-                var postData = $postForm.serialize();
-                console.log('serializing ' + postData);
+        renderNewPost();
+          
 
-                // Post.create(postParams);
-                $postForm[0].reset();
+        // wait for the form to submit
+        $postForm.on("submit", function (e) {
+          // prevent the page from reloading
+          e.preventDefault();
+          var postData = $postForm.serialize();
+          console.log('serializing ' + postData);
 
-                $('.modal').slideUp().fadeOut(300);
-                $('div.modal-backdrop').fadeOut(500);
+          $postForm[0].reset();
 
-                //POST form data
-                //THIS WORKS NO TOUCHIE!
-                $.post("/posts", postData);
-                  // $sidebarWrapper.html().fadeOut(1000);
-                  renderNewPost();
-                  $sidebarWrapper.hide().fadeIn(1800);
-              }); 
-              // END SUBMIT
+          $('.modal').slideUp().fadeOut(300);
+          $('div.modal-backdrop').fadeOut(500);
 
-          bounds.extend(place.geometry.location);
+          //POST form data
+          //THIS WORKS NO TOUCHIE!
+          $.post("/posts", postData);
+          renderNewPost();
+          $sidebarWrapper.hide().fadeIn(1800);
+        }); 
+        // END SUBMIT FORM FOR NEW POST
 
-          //MARKER EVENT LISTENER
-          google.maps.event.addListener(marker, 'click', function() {
-            map.setZoom(mapOptions.maxZoom);
-            map.setCenter(marker.getPosition());
+        bounds.extend(place.geometry.location);
 
-          }); //End MarkerClick Event Listener
+        //MARKER EVENT LISTENER
+        google.maps.event.addListener(marker, 'click', function() {
+          map.setZoom(mapOptions.maxZoom);
+          map.setCenter(marker.getPosition());
+        }); 
+        //End MarkerClick Event Listener
+        console.log('right above mystery bracket');
     }
+    //AutoZoom the map on search Submit
     map.fitBounds(bounds);
+    console.log('below fitbounds');
   });
   //End Search EventListener
 
@@ -280,8 +274,8 @@ $(function () {
     searchBox.setBounds(bounds);
   });
 
-} 
-//END INITIALIZE?????
+  } 
+  //END INITIALIZE?????
 
 setTimeout(hype, 1000);
 

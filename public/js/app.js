@@ -60,7 +60,6 @@ var hype = function () {
     		});
     	});
     
-
     $signupForm = $('#register-form');
     $signupPassword = $('#signupPassword');
     $confirmPassword = $('#confirmSignupPassword');
@@ -75,8 +74,6 @@ var hype = function () {
 
     	var signupData = $signupForm.serialize();
     	console.log('serializing signup data' + signupData);
-
-    	//$signupForm[0].reset();
 
     	//POST THE SIGNUP DATA
     	$.post('/users', signupData, console.log('CHECKING SIGNUP')).
