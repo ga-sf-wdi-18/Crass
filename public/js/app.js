@@ -24,7 +24,6 @@ var appInit = function () {
     checkLocalStorage($loginModal);
 
 	var $sidebar = $('#left');
-	// var $postForm = $('#post-form');
 	var $postTemp = _.template($("#modal-title-template").html())
 	var $placeIDform = $('#placeIDbox')
 	//hide onload
