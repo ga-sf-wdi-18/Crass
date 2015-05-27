@@ -56,7 +56,8 @@ var hype = function () {
     			$('div.modal-backdrop').fadeOut(500);
     			localStorage.setItem('isMember', true);
     		}).fail(function () {
-    			alert('DIDNT WORK');
+    			//alert('DIDNT WORK');
+    			//PUT CSS ERROR HERE
     		});
     	});
     
@@ -92,35 +93,6 @@ var hype = function () {
     ////////////END LOGIN FORM///////////////
 
 	var $modal = $('#basicModal');
-
-	///////////NEW POST FORM///////////
-
-	// // wait for the form to submit
- //  	$postForm.on("submit", function (e) {
-	//     // prevent the page from reloading
-	//     e.preventDefault();
-	//     var postData = $postForm.serialize();
-	//     console.log('serializing ' + postData);
-
-	//     // Post.create(postParams);
-	//     $postForm[0].reset();
-
-	//     $('.modal').slideUp().fadeOut(300);
-	//     $('div.modal-backdrop').fadeOut(500);
-
-	//     //POST form data
-	//     //THIS WORKS NO TOUCHIE!
-	//     $.post("/posts", postData).
-	//       done(function (data) {
-	//       	//console.log(data);
-	//       	console.log('made it to done');
-
-	      	
-	//       }).always(function () {
-	//       	console.log('made it to always');
-	//       	check();
-	//       });
- //  	}); // END SUBMIT
   	
   	////////Begin Login Modal Animations//////
 

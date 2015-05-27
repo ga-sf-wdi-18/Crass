@@ -49,7 +49,6 @@ var loginHelpers = function (req, res, next) {
 				cb(null, user);
 			})
 	};
-
 	// VERY IMPORTANT TO CONTINUE
 	next();
 };
@@ -61,9 +60,8 @@ app.get('/', function (req, res) {
 	var homePath = path.join(views, 'index.html');
 	req.currentUser(function() {
 		res.sendFile(homePath);
-	})
-	
-})
+	});
+});
 
 app.get('/posts', function (req, res) {
 	db.Post.find({},
@@ -81,19 +79,49 @@ app.post('/posts', function (req, res) {
 	//res.send(JSON.stringify(newPost));
 });
 
-app.get('/posts/api', function (req, res) {
-	//access:   http://localhost:3000/posts/api?place_id=EiwxMjMyIE1hcmtldCBTdCwgU2FuIEZyYW5jaXNjbywgQ0EgOTQxMDIsIFVTQQ  
+app.get('/api/posts/place_id/', function (req, res) {
+	//access:   http://localhost:3000/api/posts/place_id/?place_id=ChIJq0_vfZuAhYARfc1D_0lxmEw
 	var place_id = req.query.place_id;
-	var postalCode = req.query.postalCode;
-
+	
 	if (place_id !== undefined) {
 		db.Post.find({ place_id:  place_id},
 		function (err, posts) {
 			res.send(posts);
 			return;
 		});
-	} else if (postalCode !== undefined) {
+	} 
+});
+
+app.get('/api/posts/zip/', function (req, res) {
+	//access:   http://localhost:3000/api/posts/zip/?zip=94103
+	var postalCode = req.query.zip;
+
+ 	if (postalCode !== undefined) {
 		db.Post.find({ postalCode: postalCode},
+		function (err, posts) {
+			res.send(posts);
+		});
+	}
+});
+
+app.get('/api/posts/rent/', function (req, res) {
+	//access:   http://localhost:3000/api/posts/zip/?rent=3200
+	var monthlyRent = req.query.rent;
+
+ 	if (monthlyRent !== undefined) {
+		db.Post.find({ monthlyRent: monthlyRent},
+		function (err, posts) {
+			res.send(posts);
+		});
+	}
+});
+
+app.get('/api/posts/year/', function (req, res) {
+	//access:   http://localhost:3000/api/posts/zip/?rent=3200
+	var moveInYear = req.query.year;
+
+ 	if (moveInYear !== undefined) {
+		db.Post.find({ moveInYear: moveInYear},
 		function (err, posts) {
 			res.send(posts);
 		});
@@ -105,8 +133,8 @@ app.get('/posts/api', function (req, res) {
 app.get('/users', function (req, res) {
 	db.User.find({},
 		function (err, users) {
-			console.log('here are YO USERS ' + users);
-			res.send(users);
+			// console.log('here are YO USERS ' + users);
+			res.send('BAHAHA YEA RITE');
 		});
 });
 
@@ -129,7 +157,6 @@ app.get('/login', function (req, res) {
 	//NOT SURE IF WE NEED THIS?
 });
 
-
 app.post('/login', function (req, res) {
 	var user = req.body.user;
 	console.log(user + '  THIS is the user for LOGIN POST');
@@ -147,9 +174,6 @@ app.post('/login', function (req, res) {
 		}
 	});
 });
-
-
-
 
 
 app.listen(3000, function () {
