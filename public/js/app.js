@@ -1,9 +1,8 @@
-//APP.JS
+//  APP.JS  //
 
 var $modalButton = $('#pencilDiv');
-      //Hide Onload
-      $modalButton.hide();
-
+//Hide Onload
+$modalButton.hide();
 
 var checkLocalStorage = function(loginModal) {
 	var $loginModal = $loginModal || $('#loginModal');
@@ -19,7 +18,10 @@ var checkLocalStorage = function(loginModal) {
 	}
 }
 
-var hype = function () {
+var appInit = function () {
+
+	$loginModal = $('#loginModal');
+    checkLocalStorage($loginModal);
 
 	var $sidebar = $('#left');
 	// var $postForm = $('#post-form');
@@ -36,26 +38,14 @@ var hype = function () {
     //Hide Onload
     $addressBox.hide();
 
-    $loginModal = $('#loginModal');
-
-    
-
-    checkLocalStorage($loginModal);
-    
-    
-
-    ///////////////LOGIN/SIGNUP--FORM////////////////////
+    ////////////  Login/Signup Modal   ///////////////
 
     $loginForm = $('#login-form');
-    
+
     $loginForm.on('submit', function (e) {
     	e.preventDefault();
-
     	var loginData = $loginForm.serialize();
     	console.log('serializing login data' + loginData);
-
-    	//$loginForm[0].reset();
-
     	//POST THE LOGIN DATA
     	$.post('/login', loginData, console.log('CHECKING LOGIN')).
     		done(successfulLogIn).
@@ -63,7 +53,7 @@ var hype = function () {
     			//alert('DIDNT WORK');
     			//PUT CSS ERROR HERE
     		});
-    	});
+    });
     
     $signupForm = $('#register-form');
     $signupPassword = $('#signupPassword');
@@ -71,16 +61,13 @@ var hype = function () {
     
     $signupForm.on('submit', function (e) {
     	e.preventDefault();
-
     	if ($signupPassword.val() !== $confirmPassword.val()) {
     		alert('DONT MATCH');
     		//NEED TO ADD STYLING HERE
     		return;
     	}
-
     	var signupData = $signupForm.serialize();
     	console.log('serializing signup data' + signupData);
-
     	//POST THE SIGNUP DATA
     	$.post('/users', signupData, console.log('CHECKING SIGNUP')).
     		done(successfulLogIn).
@@ -88,7 +75,7 @@ var hype = function () {
 				console.log('ILLEGAL SIGNUP');
 				//put div error here
     		});
-    	});
+    });
 
 	function successfulLogIn(data) {
 		$('.modal').slideUp().fadeOut(300);
@@ -96,11 +83,9 @@ var hype = function () {
 		localStorage.setItem('isMember', true);
 	} 
 
-    ////////////END LOGIN FORM///////////////
-
-	var $modal = $('#basicModal');
+    ////////////End Login/Signup Form///////////////
   	
-  	////////Begin Login Modal Animations//////
+  	////////Begin Login/Signup Modal Animations//////
 
   	$('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
@@ -117,4 +102,5 @@ var hype = function () {
 		e.preventDefault();
 	});
 
-};//end JQuery
+};
+//end appInit

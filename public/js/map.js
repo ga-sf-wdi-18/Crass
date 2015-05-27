@@ -1,5 +1,4 @@
-
-
+//  Map.js  //
 
 $(function () {
 
@@ -8,11 +7,6 @@ $(function () {
   window.$sidebarWrapper = $('#sidebar-wrapper');
   window.$postForm = $('#post-form');
   
-
-  $sidebar.click(function () {
-    console.log('assigned');
-  });
-
   //google.maps.event.addDomListener(window, 'load', initialize);
 
   initialize();
@@ -60,20 +54,20 @@ $(function () {
               }
     ];
 
-      map.setOptions({styles: styles});
+    map.setOptions({styles: styles});
 
-      var defaultBounds = new google.maps.LatLngBounds(
-       new google.maps.LatLng(south, west),
-       new google.maps.LatLng(north, east)
-      );
+    var defaultBounds = new google.maps.LatLngBounds(
+     new google.maps.LatLng(south, west),
+     new google.maps.LatLng(north, east)
+    );
 
-      map.fitBounds(defaultBounds);
+    map.fitBounds(defaultBounds);
 
-      // Create the search box and link it to the UI element.
-      var input = (document.getElementById('pac-input'));
-      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
+    // Create the search box and link it to the UI element.
+    var input = (document.getElementById('pac-input'));
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 
-      var searchBox = new google.maps.places.SearchBox((input));
+    var searchBox = new google.maps.places.SearchBox((input));
 
       ////////////////////////////////////////////////////////////////////////////////////////
       // Listen for the event fired when the user selects an item from the
@@ -184,16 +178,11 @@ $(function () {
 
     google.maps.event.addListenerOnce(map, 'idle', function(){
     // do something only the first time the map is loaded
-      hype();
+      appInit();
     });
 
   } 
   //END INITIALIZE?????
-
-//setTimeout(hype, 1000);
-
-
-
 
 }); 
 //End JQUERY
