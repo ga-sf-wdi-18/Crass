@@ -21,10 +21,10 @@ var hype = function () {
     //Hide Onload
     $addressBox.hide();
 
-    
     $loginModal = $('#loginModal');
-    
 
+    /////CHECK STORAGE FOR RECENT LOGIN////
+    
     if (localStorage.isMember === undefined) {
     	var modaloptions = {
           backdrop : "static",
@@ -92,33 +92,47 @@ var hype = function () {
     	});
 
 
-    ////////////////////////////////////////////////////
+    ////////////END LOGIN FORM///////////////
 
 	var $modal = $('#basicModal');
 
+	///////////NEW POST FORM///////////
+
 	// wait for the form to submit
   	$postForm.on("submit", function (e) {
-    // prevent the page from reloading
-    e.preventDefault();
-    var postData = $postForm.serialize();
-    console.log('serializing ' + postData);
+	    // prevent the page from reloading
+	    e.preventDefault();
+	    var postData = $postForm.serialize();
+	    console.log('serializing ' + postData);
 
-    // Post.create(postParams);
-    $postForm[0].reset();
+	    // Post.create(postParams);
+	    $postForm[0].reset();
 
-    $('.modal').slideUp().fadeOut(300);
-    $('div.modal-backdrop').fadeOut(500);
+	    $('.modal').slideUp().fadeOut(300);
+	    $('div.modal-backdrop').fadeOut(500);
 
-    //POST form data
-    //THIS WORKS NO TOUCHIE!
-    $.post("/posts", postData).
-      done(function (data) {
-      	console.log(data);
-      });
+	    //POST form data
+	    //THIS WORKS NO TOUCHIE!
+	    $.post("/posts", postData).
+	      done(function (data) {
+	      	//console.log(data);
+	      	console.log('made it to done');
+
+	      	
+	      }).always(function () {
+	      	console.log('made it to always');
+	      	check();
+	      });
   	}); // END SUBMIT
+  	
+  // 	$.get('/posts', { place_id : {{ bus_id }} })
+  // .success(function (data) {
+  //   // do render
+  // });
 
-  	//Begin Login Modal
+ 
 
+  	////////Begin Login Modal Animations//////
 
   	$('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
@@ -134,18 +148,6 @@ var hype = function () {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
-
-
-
-  	// function Post() {};
-
-  	// Post.create = function (postParams) {
-  	// 	$.post('/posts', postParams).done(function(res) {
-  	// 		//once done re-render all posts
-  	// 		//STILL NEED TO BUILD THIS  Posts.all();
-  	// 	})
-  	// }
-
 
 };//end JQuery
 

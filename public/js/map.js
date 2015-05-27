@@ -1,5 +1,6 @@
 
 
+
 $(function () {
 
   var $sidebar = $('#left');
@@ -18,7 +19,6 @@ $(function () {
   function initialize () {
     console.log('hit initialize');
 
-    
     var mapOptions = {
       center: new google.maps.LatLng(37.803220, -122.370758),
       maxZoom: 16
@@ -79,13 +79,8 @@ $(function () {
       // pick list. Retrieve the matching places for that item.
       google.maps.event.addListener(searchBox, 'places_changed', function() {
 
-        counter++
-        //$sidebarWrapper.slideUp(200, function () {
           var resultsCheck = '';
           $sidebarWrapper.html('').hide();
-
-
-       // });
         
         var places = searchBox.getPlaces();
 
@@ -153,6 +148,8 @@ $(function () {
 
       //////////////////////////////////////////////////////
 
+      function renderNewPost() {
+
         $.get('/posts', {place_id: marker.placeId} , function (json) {
                 console.log(json + 'dataaaaa');
 
@@ -164,6 +161,9 @@ $(function () {
                     matchedPlaces.unshift(json[i]);
                   }
                 }
+
+                var matchedPlacesLength = matchedPlaces.length;
+                console.log(matchedPlacesLength + 'MP LENGTH');
 
                 console.log(matchedPlaces, '  MATCHED PALCEESESE')
 
@@ -177,7 +177,7 @@ $(function () {
                 console.log('checking markers' + markers);
                 
                 var postArray = [];
-                console.log(postArray)
+                console.log('THIS IS POST ARRAY', postArray)
 
                 function logEach(v,i, arr) {
                   console.log(v);
@@ -217,8 +217,6 @@ $(function () {
 
                 matchedPlaces.forEach(logEach)
 
-                console.log(postArray,  ' the post array');
-
                 render(postArray, 'sidebar-wrapper', 'sidebar-template');
 
                 //not sure if necessary to clear sidebar
@@ -233,6 +231,8 @@ $(function () {
                 }
 
           });
+        }
+        renderNewPost();
           //END AJAX Request
 
           bounds.extend(place.geometry.location);
@@ -272,7 +272,6 @@ $(function () {
 //END INITIALIZE?????
 
 setTimeout(hype, 1000);
-
 
 }); 
 //End JQUERY
