@@ -1,7 +1,10 @@
 //MODELS INDEX
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/rent_app');
+mongoose.connect( process.env.MONGOLAB_URI ||
+				  process.env.MONGOHQ_URL ||
+				  'mongodb://localhost/rent_app');
+
 var Schema = mongoose.Schema;
 
 module.exports.User = require('./user');
