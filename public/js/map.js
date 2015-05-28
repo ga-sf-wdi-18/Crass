@@ -12,8 +12,7 @@ $(function () {
   initialize();
 
   function initialize () {
-    console.log('hit initialize');
-
+   
     var startLat = 37.803220;
     var startLong = -122.370758;
 
@@ -162,7 +161,6 @@ $(function () {
   // Bias the SearchBox results towards places that are within the bounds of the
   // current map's viewport.
   google.maps.event.addListener(map, 'bounds_changed', function() {
-    console.log('bounds changed');
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
@@ -183,7 +181,6 @@ $(function () {
 
 function onPostFormSubmit(marker){
     var postData = $postForm.serialize();
-    console.log('serializing ' + postData);
 
     $postForm[0].reset();
 
@@ -199,13 +196,11 @@ function onPostFormSubmit(marker){
 function renderNewPost(marker) {
 
   $.get('/posts', {place_id: marker.placeId} , function (json) {
-    console.log(json + 'dataaaaa');
 
     var matchedPlaces = [];
           
     for (var i = 0; i < json.length; i ++) {
       if (json[i].place_id === marker.placeId) {
-        console.log ('Success!');
         matchedPlaces.unshift(json[i]);
       }
     }
@@ -214,7 +209,6 @@ function renderNewPost(marker) {
 
     //Template the matches from the markers Array into the sidebar
     var render = function (items, parentId, templateId) {
-      console.log('rendering' + items)
       var template = _.template($('#' + templateId).html());
       $('#' + parentId).prepend(template({collection: items}));
     }
@@ -222,7 +216,6 @@ function renderNewPost(marker) {
     var postArray = [];
 
     function logEach(v,i, arr) {
-      console.log(v);
       //VISIBLE PLACE ID BELOW, can also push address
       //postArray.push(v['place_id']);
       postArray.push( 'Move-in Year : ' + v['moveInYear']);
