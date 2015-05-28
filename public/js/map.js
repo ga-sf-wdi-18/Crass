@@ -209,6 +209,7 @@ $(function () {
           // prevent the page from reloading
           e.preventDefault();
           onPostFormSubmit(marker)
+
         }); 
 
         bounds.extend(place.geometry.location);
@@ -236,15 +237,13 @@ $(function () {
     searchBox.setBounds(bounds);
   });
 
-  //initializeSliders();
-
   google.maps.event.addListenerOnce(map, 'idle', function(){
     // do something only the first time the map is loaded
     appInit();
   });
 
   } 
-  //END INITIALIZE?????
+  //END Initialize
 
 }); 
 //End JQUERY
@@ -253,15 +252,20 @@ $(function () {
 function onPostFormSubmit(marker){
     var postData = $postForm.serialize();
 
-    $postForm[0].reset();
-
     $('.modal').slideUp().fadeOut(300);
     $('div.modal-backdrop').fadeOut(500);
+
+    $sidebarWrapper.html('');
 
     //POST form data
     $.post("/posts", postData);
     renderNewPost(marker);
     $sidebarWrapper.hide().fadeIn(1800);
+   
+}
+
+function clearForm() {
+   $postForm[0].reset();
 }
 
 function renderNewPost(marker) {
@@ -335,8 +339,11 @@ function renderNewPost(marker) {
 
     });
     //END AJAX Request
+
   }
   //END renderNewPost
+
+  
 
 
   ///////////////
