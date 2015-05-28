@@ -251,6 +251,7 @@ $(function () {
 
 function onPostFormSubmit(marker){
     var postData = $postForm.serialize();
+    $postForm[0].reset();
 
     $('.modal').slideUp().fadeOut(300);
     $('div.modal-backdrop').fadeOut(500);
@@ -264,9 +265,9 @@ function onPostFormSubmit(marker){
    
 }
 
-function clearForm() {
-   $postForm[0].reset();
-}
+// function clearForm() {
+//    $postForm[0].reset();
+// }
 
 function renderNewPost(marker) {
 
@@ -342,9 +343,3 @@ function renderNewPost(marker) {
 
   }
   //END renderNewPost
-
-  
-
-
-  ///////////////
-
