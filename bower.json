@@ -1,0 +1,22 @@
+{
+  "name": "Project_One",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cmswalker/Project_One",
+  "authors": [
+    "cmswalker <c.michael.s.walker@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.4",
+    "underscore": "~1.8.3"
+  }
+}
