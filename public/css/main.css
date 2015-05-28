@@ -203,21 +203,6 @@ html, body {
 }
 
 
-#slider-range {
-    -webkit-appearance: slider-vertical;
-    width: 20px;
-    height: 100px;
-    z-index: 10;
-    position: relative;
-    left: 1%;
-    top: 23%;
-    margin: 0;
-    padding: 0;
-}
-
-
-
-
 /*************************************/
 
 
