@@ -33,9 +33,21 @@ var appInit = function () {
 	//hide onload
     $postalCodeform.hide();
 
-	var $addressBox = $('#addressDiv')
+	var $addressBox = $('#addressDiv');
     //Hide Onload
     $addressBox.hide();
+
+    var $addressBox2 = $('#addressBox');
+    //Hide Onload
+    $addressBox2.hide();
+
+    var $latBox = $('#latBox');
+    //Hide Onload
+    $latBox.hide();
+
+    var $lonBox = $('#lonBox');
+    //Hide Onload
+    $lonBox.hide();
 
     ////////////  Login/Signup Modal   ///////////////
 

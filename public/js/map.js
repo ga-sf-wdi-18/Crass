@@ -1,12 +1,15 @@
 //  Map.js  //
 
+var searchbox;
+var map;
+
 $(function () {
 
   window.$sidebar = $('#left');
   window.$sidebarButtons = $('.sidebarButtons');
   window.$sidebarWrapper = $('#sidebar-wrapper');
   window.$postForm = $('#post-form');
-  
+
   //google.maps.event.addDomListener(window, 'load', initialize);
 
   initialize();
@@ -28,7 +31,7 @@ $(function () {
 
     var markers = [];
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+    map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
     var styles = [
@@ -66,7 +69,7 @@ $(function () {
     var input = (document.getElementById('pac-input'));
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 
-    var searchBox = new google.maps.places.SearchBox((input));
+    searchBox = new google.maps.places.SearchBox((input));
 
       ////////////////////////////////////////////////////////////////////////////////////////
       // Listen for the event fired when the user selects an item from the
@@ -87,7 +90,7 @@ $(function () {
       //remove <1 to get full list of matched
       for (var i = 0, place; place = places[i], i < 1; i++) {
 
-        var image = {
+          var image = {
           url: place.icon,
           size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),
@@ -96,7 +99,7 @@ $(function () {
         };
 
         // Create a marker for each place.
-        var marker = new google.maps.Marker({
+          var marker = new google.maps.Marker({
           map: map,
           icon: image,
           title: place.name,
@@ -108,7 +111,7 @@ $(function () {
 
         ///////////////////////////
 
-        //fill markers array with current FINISHED search// May need to change to marker[i] 
+        //fill markers array with current FINISHED search
         markers.push(marker);
 
         var $addressBox = $('#addressDiv');
@@ -119,16 +122,83 @@ $(function () {
 
         //Limit Modal title to current marker.title only
         $('#myModalLabel').html(marker.formatted_address);
+        var addy = $('#myModalLabel').html();
 
         ///   Fill and hide elements for new post   ///
         var markerPlace = marker.placeId;
         var markerPostalCode = marker.postalCode;
+        var markerLat = marker.position.A;
+        var markerLon = marker.position.F;
+
+        var $markerLatform = $('#latBox');
+        $markerLatform.val(markerLat);
+        var $markerLonform = $('#lonBox');
+        $markerLonform.val(markerLon);
 
         var $placeIDform = $('#placeIDbox');
         $placeIDform.val(markerPlace);
 
+        var $addressform = $('#addressBox');
+        $addressform.val(addy);
+
         var $postalCodeform = $('#postalCodebox');
         $postalCodeform.val(markerPostalCode);
+
+   //////////////////////////////////////////////
+      //   renderCloseMarkers(marker);
+
+      //   var markerPlaces = [];
+      //   var newMarkers = [];
+      //   var idArray = [];
+
+      //   function renderCloseMarkers(marker) {
+
+      //       $.getJSON('/posts', {postalCode: marker.postalCode} , function (json) {
+ 
+      //          for (var i = 0; i < json.length; i ++) {
+      //              markerPlaces.unshift(json[i]);    
+      //          }
+
+      //          console.log(markerPlaces + ' HERES MARKERPLACES');
+
+      //          function grabEach(v,i,arr) {
+      //           var miniArray = [v['lat'], v['long']];
+      //           newMarkers.push(miniArray);
+      //           idArray.push(v['place_id']);
+      //          }
+
+      //          markerPlaces.forEach(grabEach);
+
+      //           console.log(idArray);
+
+      //         for (var i = 0; i < newMarkers.length ; i++) {
+      //           // console.log('now going through ' + i + ' times')
+      //           var dropLat = newMarkers[i][0];
+      //           var dropLon = newMarkers[i][1];  
+
+      //           var myLatlng = new google.maps.LatLng(dropLat,dropLon);
+
+      //           var marker = new google.maps.Marker({
+      //               position: myLatlng,
+      //               icon: image,
+      //              // placeId: marker.place_id,
+      //               map: map
+      //             });
+
+      //           google.maps.event.addListener(marker, 'click', function() {
+      //             console.log('CLICKED');
+      //             console.log(this);
+      //           });
+
+      //         }
+
+      //       }).done();
+      //       //END AJAX
+      //   }
+      //   //End renderCloseMarkers
+      //   //empty the arrays to prepare for next search
+      // markerPlaces = [];
+      // newMarkers=[];
 
       //////////////////////////////////////////////////////
 
@@ -147,6 +217,7 @@ $(function () {
         google.maps.event.addListener(marker, 'click', function() {
           map.setZoom(mapOptions.maxZoom);
           map.setCenter(marker.getPosition());
+          console.log('CLICKED');
         });
 
     }
@@ -266,3 +337,7 @@ function renderNewPost(marker) {
     //END AJAX Request
   }
   //END renderNewPost
+
+
+  ///////////////
+

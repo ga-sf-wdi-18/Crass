@@ -14,6 +14,18 @@ var postSchema = new Schema({
 						type: String,
 						required: true
 					},
+					formatted_address: {
+						type: String,
+						required: false
+					},
+					lat: {
+						type: Number,
+						required: false
+					},
+					long: {
+						type: Number,
+						required: false
+					},
 					postalCode: {
 						type: Number,
 						required: true

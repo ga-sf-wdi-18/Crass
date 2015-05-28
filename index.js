@@ -105,7 +105,7 @@ app.get('/api/posts/zip/', function (req, res) {
 });
 
 app.get('/api/posts/rent/', function (req, res) {
-	//access:   http://localhost:3000/api/posts/zip/?rent=3200
+	//access:   http://localhost:3000/api/posts/rent/?rent=1
 	var monthlyRent = req.query.rent;
 
  	if (monthlyRent !== undefined) {
