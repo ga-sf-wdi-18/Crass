@@ -29,6 +29,10 @@ var postSchema = new Schema({
 						type: Number,
 						required: false
 					},
+					title: {
+						type: String,
+						required: false
+					},
 					postalCode: {
 						type: Number,
 						required: true

@@ -2,6 +2,8 @@
 
 var searchbox;
 var map;
+var places;
+var place;
 
 $(function () {
 
@@ -29,7 +31,7 @@ $(function () {
     var north = 37.871814;
     var east = -122.273756;
 
-    var markers = [];
+    markers = [];
 
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
@@ -69,12 +71,13 @@ $(function () {
     var input = (document.getElementById('pac-input'));
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 
-    searchBox = new google.maps.places.SearchBox((input));
+    var searchBox = new google.maps.places.SearchBox((input));
 
       ////////////////////////////////////////////////////////////////////////////////////////
       // Listen for the event fired when the user selects an item from the
       // pick list. Retrieve the matching places for that item.
     google.maps.event.addListener(searchBox, 'places_changed', function() {
+      
       $sidebarWrapper.html('').hide();
         
       var places = searchBox.getPlaces();
@@ -111,6 +114,9 @@ $(function () {
 
         ///////////////////////////
 
+        var markerPlace = marker.placeId;
+        var markerPostalCode = marker.postalCode;
+
         //fill markers array with current FINISHED search
         markers.push(marker);
 
@@ -124,81 +130,89 @@ $(function () {
         $('#myModalLabel').html(marker.formatted_address);
         var addy = $('#myModalLabel').html();
 
-        ///   Fill and hide elements for new post   ///
-        var markerPlace = marker.placeId;
-        var markerPostalCode = marker.postalCode;
-        var markerLat = marker.position.A;
-        var markerLon = marker.position.F;
+        //////   Fill and hide elements for new post   //////
+       
+        // var markerLat = marker.position.A;
+        // var markerLon = marker.position.F;
+        // var markerOriginalTitle = marker.title;
 
-        var $markerLatform = $('#latBox');
-        $markerLatform.val(markerLat);
-        var $markerLonform = $('#lonBox');
-        $markerLonform.val(markerLon);
+        // var $markerLatform = $('#latBox');
+        // $markerLatform.val(markerLat);
+        // var $markerLonform = $('#lonBox');
+        // $markerLonform.val(markerLon);
 
+        // var $markerTitle = $('#placeTitle');
+        // $markerTitle.val(markerOriginalTitle);
+
+        // var $addressform = $('#addressBox');
+        // $addressform.val(addy);
+
+    ////////////////////////////////////////////////
         var $placeIDform = $('#placeIDbox');
         $placeIDform.val(markerPlace);
-
-        var $addressform = $('#addressBox');
-        $addressform.val(addy);
 
         var $postalCodeform = $('#postalCodebox');
         $postalCodeform.val(markerPostalCode);
 
    //////////////////////////////////////////////
-      //   renderCloseMarkers(marker);
+        // var markerPlaces = [];
+        // var newMarkers = [];
+        // var idArray = [];
 
-      //   var markerPlaces = [];
-      //   var newMarkers = [];
-      //   var idArray = [];
+        // renderCloseMarkers(marker);
 
-      //   function renderCloseMarkers(marker) {
+        // console.log(marker.postalCode + 'HERES POSTAL CODE')
 
-      //       $.getJSON('/posts', {postalCode: marker.postalCode} , function (json) {
- 
-      //          for (var i = 0; i < json.length; i ++) {
-      //              markerPlaces.unshift(json[i]);    
-      //          }
+        // function renderCloseMarkers(marker) {
 
-      //          console.log(markerPlaces + ' HERES MARKERPLACES');
+        //   $.getJSON('/api/posts/zip/?zip=' +marker.postalCode + '', {postalCode: marker.postalCode} , function (json) {
 
-      //          function grabEach(v,i,arr) {
-      //           var miniArray = [v['lat'], v['long']];
-      //           newMarkers.push(miniArray);
-      //           idArray.push(v['place_id']);
-      //          }
+        //     for (var i = 0; i < json.length; i ++) {
+        //          markerPlaces.unshift(json[i]);    
+        //     }
 
-      //          markerPlaces.forEach(grabEach);
+        //     function grabEach(v,i,arr) {
+        //       var miniArray = [v['lat'], v['long'], v['place_id'], v['title']];
+        //       newMarkers.push(miniArray);
+        //     }
 
-      //           console.log(idArray);
+        //     markerPlaces.forEach(grabEach);
 
-      //         for (var i = 0; i < newMarkers.length ; i++) {
-      //           // console.log('now going through ' + i + ' times')
-      //           var dropLat = newMarkers[i][0];
-      //           var dropLon = newMarkers[i][1];  
+        //     for (var i = 0; i < newMarkers.length ; i++) {
+        //       // console.log('now going through ' + i + ' times')
+        //       var dropLat = newMarkers[i][0];
+        //       var dropLon = newMarkers[i][1];  
+        //       var newPlaceID = newMarkers[i][2];
+        //       var newTitle = newMarkers[i][3];
 
-      //           var myLatlng = new google.maps.LatLng(dropLat,dropLon);
+        //       var myLatlng = new google.maps.LatLng(dropLat,dropLon);
+        //       // console.log('dropping markers');
+        //       var marker = new google.maps.Marker({
+        //           position: myLatlng,
+        //           icon: image,
+        //           placeId: newPlaceID,
+        //           title: newTitle,
+        //           map: map
+        //         });
 
-      //           var marker = new google.maps.Marker({
-      //               position: myLatlng,
-      //               icon: image,
-      //              // placeId: marker.place_id,
-      //               map: map
-      //             });
+        //       google.maps.event.addListener(marker, 'click', function() {
+        //         console.log('CLICKED');
+        //         console.log(this);
+        //         $addressBox.html(this.title).fadeIn(1000);
+        //         console.log(this.placeId + 'HERE I AM');
+        //         console.log(this.title);
+        //         $('#myModalLabel').html(this.title);
+        //         renderNewPost(this);
+        //       });
 
-      //           google.maps.event.addListener(marker, 'click', function() {
-      //             console.log('CLICKED');
-      //             console.log(this);
-      //           });
-
-      //         }
-
-      //       }).done();
-      //       //END AJAX
-      //   }
-      //   //End renderCloseMarkers
-      //   //empty the arrays to prepare for next search
-      // markerPlaces = [];
-      // newMarkers=[];
+        //     }
+        //   }).done();
+        //   //END AJAX
+        // }
+        // //End renderCloseMarkers
+        // //empty the arrays to prepare for next search
+        // markerPlaces = [];
+        // newMarkers=[];
 
       //////////////////////////////////////////////////////
 
@@ -208,8 +222,7 @@ $(function () {
         $postForm.on("submit", function(e){
           // prevent the page from reloading
           e.preventDefault();
-          onPostFormSubmit(marker)
-
+          onPostFormSubmit(marker);
         }); 
 
         bounds.extend(place.geometry.location);
@@ -218,7 +231,6 @@ $(function () {
         google.maps.event.addListener(marker, 'click', function() {
           map.setZoom(mapOptions.maxZoom);
           map.setCenter(marker.getPosition());
-          console.log('CLICKED');
         });
 
     }
@@ -265,13 +277,11 @@ function onPostFormSubmit(marker){
    
 }
 
-// function clearForm() {
-//    $postForm[0].reset();
-// }
-
 function renderNewPost(marker) {
 
   $.get('/posts', {place_id: marker.placeId} , function (json) {
+
+    $sidebarWrapper.html('');
 
     var matchedPlaces = [];
           
@@ -330,6 +340,8 @@ function renderNewPost(marker) {
 
     render(postArray, 'sidebar-wrapper', 'sidebar-template');
 
+    matchedPlaces = [];
+
     $sidebarWrapper.fadeIn(1000);
 
     var emptyMessage = "<hr> There's no data regarding this address, how about posting yours anonymously?"
@@ -338,8 +350,10 @@ function renderNewPost(marker) {
       $sidebarWrapper.html(emptyMessage).hide().fadeIn(600);
     }
 
+    postArray = [];
+
     });
     //END AJAX Request
-
+    
   }
   //END renderNewPost

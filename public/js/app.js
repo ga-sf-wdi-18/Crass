@@ -33,6 +33,10 @@ var appInit = function () {
 	//hide onload
     $postalCodeform.hide();
 
+    var $placeTitle = $('#placeTitle');
+    //hide onload
+    $placeTitle.hide();
+
 	var $addressBox = $('#addressDiv');
     //Hide Onload
     $addressBox.hide();
