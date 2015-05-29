@@ -12,6 +12,11 @@ html, body {
   z-index: 1;
 }
 
+#sidebar-wrapper {
+  text-align: right;
+  margin-top: 20px;
+}
+
 #map-canvas .gm-style div:nth-of-type(2) a div{
   display: none;
 }

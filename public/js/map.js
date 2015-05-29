@@ -26,6 +26,8 @@ $(function () {
       maxZoom: 16
     };
 
+    $sidebarWrapper.html('Welcome to Crass <br><br> use the searchbox to find past and present rents in your area.<br><br>All posts are anonymous.');
+
     var south = 37.732895;
     var west = -122.434014;
     var north = 37.871814;
