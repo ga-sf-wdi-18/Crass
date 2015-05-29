@@ -1,9 +1,9 @@
 //  Map.js  //
 
-var searchbox;
-var map;
-var places;
-var place;
+// var searchbox;
+// var map;
+// var places;
+// var place;
 
 $(function () {
 
@@ -102,7 +102,7 @@ $(function () {
         };
 
         // Create a marker for each place.
-          var marker = new google.maps.Marker({
+          marker = new google.maps.Marker({
           map: map,
           icon: image,
           title: place.name,
@@ -216,14 +216,17 @@ $(function () {
 
       //////////////////////////////////////////////////////
 
-        renderNewPost(marker);
-
         // wait for the form to submit
         $postForm.on("submit", function(e){
           // prevent the page from reloading
           e.preventDefault();
+          marker = markers[markers.length-1];
+          console.log(markers[markers.length-1] + 'HERE');
+          console.log (marker.formatted_address);
           onPostFormSubmit(marker);
         }); 
+
+        renderNewPost(marker);
 
         bounds.extend(place.geometry.location);
 
@@ -263,7 +266,9 @@ $(function () {
 
 function onPostFormSubmit(marker){
     var postData = $postForm.serialize();
-    $postForm[0].reset();
+    //$postForm[0].reset();
+    $('#moveInYearDiv').val('');
+    $('#monthlyRentDiv').val('');
 
     $('.modal').slideUp().fadeOut(300);
     $('div.modal-backdrop').fadeOut(500);
@@ -274,7 +279,6 @@ function onPostFormSubmit(marker){
     $.post("/posts", postData);
     renderNewPost(marker);
     $sidebarWrapper.hide().fadeIn(1800);
-   
 }
 
 function renderNewPost(marker) {
