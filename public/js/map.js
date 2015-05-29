@@ -118,8 +118,10 @@ $(function () {
         var markerPostalCode = marker.postalCode;
 
         //fill markers array with current FINISHED search
-        markers.push(marker);
-
+        if (marker.title !== undefined && marker.formatted_address !== undefined) {
+           markers.push(marker);
+        }
+       
         var $addressBox = $('#addressDiv');
         //fade in Address above button with marker address info
         $addressBox.html(marker.title).fadeIn(1000);
@@ -132,20 +134,20 @@ $(function () {
 
         //////   Fill and hide elements for new post   //////
        
-        // var markerLat = marker.position.A;
-        // var markerLon = marker.position.F;
-        // var markerOriginalTitle = marker.title;
+        var markerLat = marker.position.A;
+        var markerLon = marker.position.F;
+        var markerOriginalTitle = marker.title;
 
-        // var $markerLatform = $('#latBox');
-        // $markerLatform.val(markerLat);
-        // var $markerLonform = $('#lonBox');
-        // $markerLonform.val(markerLon);
+        var $markerLatform = $('#latBox');
+        $markerLatform.val(markerLat);
+        var $markerLonform = $('#lonBox');
+        $markerLonform.val(markerLon);
 
-        // var $markerTitle = $('#placeTitle');
-        // $markerTitle.val(markerOriginalTitle);
+        var $markerTitle = $('#placeTitle');
+        $markerTitle.val(markerOriginalTitle);
 
-        // var $addressform = $('#addressBox');
-        // $addressform.val(addy);
+        var $addressform = $('#addressBox');
+        $addressform.val(addy);
 
     ////////////////////////////////////////////////
         var $placeIDform = $('#placeIDbox');
@@ -207,7 +209,7 @@ $(function () {
 
         //     }
         //   }).done();
-        //   //END AJAX
+        //   //END AJAX ZIP REQUEST
         // }
         // //End renderCloseMarkers
         // //empty the arrays to prepare for next search
@@ -216,17 +218,17 @@ $(function () {
 
       //////////////////////////////////////////////////////
 
+       renderNewPost(marker);
+       console.log('just finished rendering top w marker');
+
         // wait for the form to submit
         $postForm.on("submit", function(e){
           // prevent the page from reloading
           e.preventDefault();
           marker = markers[markers.length-1];
-          console.log(markers[markers.length-1] + 'HERE');
-          console.log (marker.formatted_address);
+          console.log(markers.length);
           onPostFormSubmit(marker);
         }); 
-
-        renderNewPost(marker);
 
         bounds.extend(place.geometry.location);
 
@@ -276,14 +278,19 @@ function onPostFormSubmit(marker){
     $sidebarWrapper.html('');
 
     //POST form data
-    $.post("/posts", postData);
+    var posting = $.post("/posts", postData);
+    posting.done(function (data) {
+      console.log(data);
+    })
     renderNewPost(marker);
-    $sidebarWrapper.hide().fadeIn(1800);
+    console.log('just finished the new post render');
+    //$sidebarWrapper.hide().fadeIn(1800);
 }
 
 function renderNewPost(marker) {
 
   $.get('/posts', {place_id: marker.placeId} , function (json) {
+    console.log('finding matching places')
 
     $sidebarWrapper.html('');
 
