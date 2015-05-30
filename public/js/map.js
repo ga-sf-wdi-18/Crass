@@ -1,9 +1,5 @@
 //  Map.js  //
 
-// var searchbox;
-// var map;
-// var places;
-// var place;
 
 $(function () {
 
@@ -159,83 +155,23 @@ $(function () {
         $postalCodeform.val(markerPostalCode);
 
    //////////////////////////////////////////////
-        // var markerPlaces = [];
-        // var newMarkers = [];
-        // var idArray = [];
 
-        // renderCloseMarkers(marker);
+        renderNewPost(marker);
+        console.log('just finished rendering top w marker');
 
-        // console.log(marker.postalCode + 'HERES POSTAL CODE')
-
-        // function renderCloseMarkers(marker) {
-
-        //   $.getJSON('/api/posts/zip/?zip=' +marker.postalCode + '', {postalCode: marker.postalCode} , function (json) {
-
-        //     for (var i = 0; i < json.length; i ++) {
-        //          markerPlaces.unshift(json[i]);    
-        //     }
-
-        //     function grabEach(v,i,arr) {
-        //       var miniArray = [v['lat'], v['long'], v['place_id'], v['title']];
-        //       newMarkers.push(miniArray);
-        //     }
-
-        //     markerPlaces.forEach(grabEach);
-
-        //     for (var i = 0; i < newMarkers.length ; i++) {
-        //       // console.log('now going through ' + i + ' times')
-        //       var dropLat = newMarkers[i][0];
-        //       var dropLon = newMarkers[i][1];  
-        //       var newPlaceID = newMarkers[i][2];
-        //       var newTitle = newMarkers[i][3];
-
-        //       var myLatlng = new google.maps.LatLng(dropLat,dropLon);
-        //       // console.log('dropping markers');
-        //       var marker = new google.maps.Marker({
-        //           position: myLatlng,
-        //           icon: image,
-        //           placeId: newPlaceID,
-        //           title: newTitle,
-        //           map: map
-        //         });
-
-        //       google.maps.event.addListener(marker, 'click', function() {
-        //         console.log('CLICKED');
-        //         console.log(this);
-        //         $addressBox.html(this.title).fadeIn(1000);
-        //         console.log(this.placeId + 'HERE I AM');
-        //         console.log(this.title);
-        //         $('#myModalLabel').html(this.title);
-        //         renderNewPost(this);
-        //       });
-
-        //     }
-        //   }).done();
-        //   //END AJAX ZIP REQUEST
-        // }
-        // //End renderCloseMarkers
-        // //empty the arrays to prepare for next search
-        // markerPlaces = [];
-        // newMarkers=[];
-
-      //////////////////////////////////////////////////////
-
-       renderNewPost(marker);
-       console.log('just finished rendering top w marker');
-
-        // wait for the form to submit
-        $postForm.on("submit", function(e){
+      // wait for the form to submit
+      $postForm.on("submit", function(e){
           // prevent the page from reloading
           e.preventDefault();
           marker = markers[markers.length-1];
           console.log(markers.length);
           onPostFormSubmit(marker);
-        }); 
+      }); 
 
         bounds.extend(place.geometry.location);
 
         //MARKER EVENT LISTENER
-        google.maps.event.addListener(marker, 'click', function() {
+      google.maps.event.addListener(marker, 'click', function() {
           map.setZoom(mapOptions.maxZoom);
           map.setCenter(marker.getPosition());
         });
