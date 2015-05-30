@@ -1,8 +1,4 @@
-What is your project and what does it do?
-What was your motivation to build it?
-What are you proud of?
-What would you do with more time?
-What aspect presented the most challenges?
+
 
 # Crass v.01
 
